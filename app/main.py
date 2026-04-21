@@ -156,6 +156,13 @@ def root() -> dict:
     }
 
 
+@app.get("/home", response_class=HTMLResponse, include_in_schema=False)
+def home() -> HTMLResponse:
+    # Clean URL for the public map; mirrors /bearsmart without breaking the
+    # JSON contract used by the GPT Action at `/`.
+    return bearsmart_index()
+
+
 @app.get("/bearsmart", response_class=HTMLResponse, include_in_schema=False)
 def bearsmart_demo():
     return bearsmart_index()

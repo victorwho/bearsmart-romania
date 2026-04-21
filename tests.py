@@ -544,6 +544,14 @@ def test_root_exposes_bearsmart_mvp_link():
     assert r.json()["bearsmart_mvp"] == "/bearsmart"
 
 
+def test_home_alias_serves_map_page():
+    r = client.get("/home")
+    assert r.status_code == 200
+    assert "BearSmart Romania | Interactive Map" in r.text
+    # Confirms the Now/Plan/Report sheet is wired on this alias too.
+    assert 'data-tab="now"' in r.text
+
+
 def test_bearsmart_mvp_page_loads():
     r = client.get("/bearsmart")
     assert r.status_code == 200
