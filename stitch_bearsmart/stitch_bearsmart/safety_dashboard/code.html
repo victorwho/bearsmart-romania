@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>BearSmart | Personalized Safety Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Public+Sans:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-tertiary-fixed": "#2f1500",
+              "tertiary-container": "#6a3700",
+              "tertiary-fixed-dim": "#ffb77d",
+              "background": "#fff9ed",
+              "on-primary-container": "#98ba9a",
+              "error": "#ba1a1a",
+              "outline": "#737971",
+              "surface-container-low": "#f9f3e6",
+              "surface-dim": "#dfd9cd",
+              "on-surface-variant": "#424842",
+              "inverse-primary": "#adcfae",
+              "secondary-fixed-dim": "#f4bb92",
+              "on-background": "#1d1c14",
+              "primary-fixed-dim": "#adcfae",
+              "inverse-surface": "#333028",
+              "surface": "#fff9ed",
+              "on-tertiary-container": "#ff9939",
+              "secondary-fixed": "#ffdcc5",
+              "on-primary-fixed-variant": "#2f4d34",
+              "on-error": "#ffffff",
+              "surface-container-lowest": "#ffffff",
+              "on-primary": "#ffffff",
+              "surface-container-highest": "#e8e2d6",
+              "surface-bright": "#fff9ed",
+              "primary-container": "#2d4b32",
+              "inverse-on-surface": "#f6f0e4",
+              "surface-container-high": "#eee8db",
+              "surface-container": "#f3ede1",
+              "tertiary-fixed": "#ffdcc3",
+              "on-tertiary-fixed-variant": "#6e3900",
+              "on-secondary-container": "#794e2e",
+              "on-secondary": "#ffffff",
+              "surface-tint": "#47664b",
+              "error-container": "#ffdad6",
+              "primary": "#17341d",
+              "primary-fixed": "#c8ecc9",
+              "tertiary": "#4a2400",
+              "on-primary-fixed": "#03210c",
+              "secondary-container": "#fdc39a",
+              "surface-variant": "#e8e2d6",
+              "on-tertiary": "#ffffff",
+              "on-secondary-fixed": "#301400",
+              "outline-variant": "#c2c8bf",
+              "secondary": "#805533",
+              "on-error-container": "#93000a",
+              "on-surface": "#1d1c14",
+              "on-secondary-fixed-variant": "#653d1e"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Public Sans"],
+              "label": ["Public Sans"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+      body { font-family: 'Public Sans', sans-serif; background-color: #fff9ed; color: #1d1c14; }
+      h1, h2, h3 { font-family: 'Manrope', sans-serif; }
+      .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+      .topographical-pattern {
+        background-image: radial-gradient(#2f4d34 0.5px, transparent 0.5px);
+        background-size: 24px 24px;
+        opacity: 0.05;
+      }
+    </style>
+</head>
+<body class="bg-surface selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- TopNavBar -->
+<header class="docked full-width top-0 z-50 sticky bg-[#fff9ed]/80 backdrop-blur-xl shadow-sm flex justify-between items-center px-8 py-4 w-full">
+<div class="flex items-center gap-8">
+<span class="text-2xl font-black text-[#17341d] uppercase tracking-tighter">BearSmart</span>
+<nav class="hidden md:flex gap-6">
+<a class="font-manrope tracking-tight font-bold text-[#424842] hover:text-[#17341d] transition-colors" href="#">Map</a>
+<a class="font-manrope tracking-tight font-bold text-[#424842] hover:text-[#17341d] transition-colors" href="#">Community</a>
+<a class="font-manrope tracking-tight font-bold text-[#424842] hover:text-[#17341d] transition-colors" href="#">Safety Guides</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="bg-surface-container-highest text-primary px-4 py-2 font-manrope font-bold text-sm transition-all hover:bg-surface-container-high">Emergency</button>
+<button class="bg-primary text-white px-5 py-2 font-manrope font-bold text-sm transition-all hover:opacity-80">Report Sighting</button>
+<div class="w-10 h-10 rounded-full overflow-hidden bg-surface-container-high border-2 border-primary-fixed">
+<img alt="User Safety Profile" data-alt="close-up portrait of a rugged outdoor guide with a friendly expression, soft natural forest lighting background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB25yKzWR3Z-a7Ze5T40rh5iRe9rrU9SAblB6vCz90jaLfTgTh6yyztLfWfwv4wXBdQEbmaSYHfIXzkMXWX8pYzwDeX3N2FEPKWVT6iJongUtWkSXp3e89_4Z6gb5UwlGH7_-PlFBAAePy1GrohMgsFhTn3Yi7bShqNrDNoltwp6Ie1hezA-cJKf8ciHhdRsO8IQRsg4psmCLa6ZddyBNt_7jvosjJvJNoPlXnumS2vmfH_b3aY5MxHpsoz9T9Ob1uIfPJdUt1MZ5P5"/>
+</div>
+</div>
+</header>
+<div class="flex min-h-screen">
+<!-- SideNavBar (Suppressed for focused dashboard experience, but keeping structural space) -->
+<aside class="fixed left-0 top-16 h-[calc(100vh-4rem)] w-72 bg-[#f9f3e6] flex flex-col z-40 p-6 hidden lg:flex">
+<div class="mb-8">
+<h3 class="text-lg font-bold text-[#17341d] font-manrope uppercase tracking-tight">The Ranger's Guide</h3>
+<p class="text-xs text-on-surface-variant font-medium">Safety &amp; Conflict Monitoring</p>
+</div>
+<nav class="flex flex-col gap-2 flex-grow">
+<div class="flex items-center gap-3 px-4 py-3 bg-surface-container-lowest text-primary rounded-l-full shadow-inner font-manrope text-sm font-semibold">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span>Dashboard</span>
+</div>
+<a class="flex items-center gap-3 px-4 py-3 text-[#424842] hover:bg-[#e8e2d6] transition-all duration-200 rounded-l-full font-manrope text-sm font-semibold" href="#">
+<span class="material-symbols-outlined" data-icon="visibility">visibility</span>
+<span>Sightings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#424842] hover:bg-[#e8e2d6] transition-all duration-200 rounded-l-full font-manrope text-sm font-semibold" href="#">
+<span class="material-symbols-outlined" data-icon="campaign">campaign</span>
+<span>News Feed</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#424842] hover:bg-[#e8e2d6] transition-all duration-200 rounded-l-full font-manrope text-sm font-semibold" href="#">
+<span class="material-symbols-outlined" data-icon="verified">verified</span>
+<span>Certified Zones</span>
+</a>
+</nav>
+<div class="mt-auto pt-6 border-t border-outline-variant/20 flex flex-col gap-2">
+<a class="flex items-center gap-3 px-4 py-2 text-[#424842] hover:translate-x-1 duration-200 font-manrope text-sm font-semibold" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span>Settings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-[#424842] hover:translate-x-1 duration-200 font-manrope text-sm font-semibold" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span>Support</span>
+</a>
+</div>
+</aside>
+<!-- Main Canvas -->
+<main class="flex-grow lg:ml-72 p-6 md:p-10 relative overflow-hidden">
+<!-- Background Texture -->
+<div class="absolute inset-0 topographical-pattern pointer-events-none"></div>
+<div class="max-w-6xl mx-auto relative">
+<!-- Header Section -->
+<section class="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div>
+<span class="text-secondary font-bold text-xs tracking-widest uppercase mb-2 block">Aspen Ridge Estates</span>
+<h1 class="text-4xl md:text-5xl font-extrabold text-primary tracking-tight leading-none">Safety Dashboard</h1>
+<p class="mt-4 text-on-surface-variant max-w-lg font-body">Welcome back, Ranger Mark. Your local area is currently stable, but seasonal shifts are increasing activity in the north corridor.</p>
+</div>
+<!-- Your Neighborhood Status -->
+<div class="bg-surface-container-high p-6 rounded-xl flex items-center gap-6 shadow-sm border-l-4 border-primary">
+<div class="relative">
+<div class="w-16 h-16 rounded-full border-4 border-primary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined text-3xl text-primary" style="font-variation-settings: 'FILL' 1;">eco</span>
+</div>
+<div class="absolute -top-1 -right-1 w-4 h-4 bg-primary-fixed rounded-full animate-pulse"></div>
+</div>
+<div>
+<p class="text-[10px] uppercase font-bold tracking-widest text-secondary">Current Status</p>
+<h3 class="text-2xl font-black text-primary leading-none">Green / Low</h3>
+<p class="text-xs text-on-surface-variant font-medium mt-1">No sightings in 48 hrs</p>
+</div>
+</div>
+</section>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+<!-- Safety Checklist (Asymmetric Column) -->
+<div class="md:col-span-5 flex flex-col gap-6">
+<div class="bg-surface-container p-8 rounded-xl relative overflow-hidden group">
+<div class="absolute top-0 right-0 w-32 h-32 bg-primary-fixed/20 rounded-bl-full -mr-10 -mt-10 transition-transform group-hover:scale-110"></div>
+<h2 class="text-xl font-bold text-primary mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">fact_check</span>
+                                Safety Checklist
+                            </h2>
+<ul class="space-y-4">
+<li class="flex items-start gap-4 p-4 bg-surface-container-lowest rounded-lg border-l-4 border-secondary transition-all hover:translate-x-1">
+<div class="mt-1">
+<input checked="" class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary-container" type="checkbox"/>
+</div>
+<div>
+<h4 class="font-bold text-primary text-sm">Secure Bird Feeders</h4>
+<p class="text-xs text-on-surface-variant mt-1">Bring in feeders between April and November.</p>
+</div>
+</li>
+<li class="flex items-start gap-4 p-4 bg-surface-container-lowest rounded-lg border-l-4 border-secondary/40 transition-all hover:translate-x-1">
+<div class="mt-1">
+<input class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary-container" type="checkbox"/>
+</div>
+<div>
+<h4 class="font-bold text-primary text-sm">Electric Fencing Check</h4>
+<p class="text-xs text-on-surface-variant mt-1">Test voltage on orchard perimeter fence.</p>
+</div>
+</li>
+<li class="flex items-start gap-4 p-4 bg-surface-container-lowest rounded-lg border-l-4 border-secondary/40 transition-all hover:translate-x-1">
+<div class="mt-1">
+<input class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary-container" type="checkbox"/>
+</div>
+<div>
+<h4 class="font-bold text-primary text-sm">Garbage Storage</h4>
+<p class="text-xs text-on-surface-variant mt-1">Ensure bins are in the garage until morning pickup.</p>
+</div>
+</li>
+</ul>
+<button class="mt-8 w-full py-3 bg-primary text-white font-bold text-sm rounded-lg hover:bg-primary-container transition-colors">
+                                Update My Property Profile
+                            </button>
+</div>
+<!-- Community News -->
+<div class="bg-primary text-on-primary-container p-8 rounded-xl">
+<div class="flex items-center justify-between mb-4">
+<h2 class="text-lg font-bold text-white uppercase tracking-tight">Community News</h2>
+<span class="bg-primary-container text-primary-fixed text-[10px] px-2 py-1 rounded font-bold">LATEST</span>
+</div>
+<div class="space-y-4">
+<div class="p-4 bg-white/5 rounded-lg border border-white/10">
+<p class="text-xs font-bold text-primary-fixed mb-1 italic">Note from Sarah, Local Coordinator:</p>
+<p class="text-sm text-white/90 leading-relaxed font-medium">"Berry season is starting early this year. Expect more black bears near the Silver Creek trailhead."</p>
+</div>
+<a class="text-xs font-bold text-primary-fixed-dim flex items-center gap-1 hover:underline" href="#">
+                                    View all local alerts <span class="material-symbols-outlined text-xs">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+<!-- Recent Activity Near You (Large Centerpiece) -->
+<div class="md:col-span-7">
+<div class="bg-surface-container-highest rounded-xl h-full flex flex-col overflow-hidden">
+<div class="p-6 flex items-center justify-between">
+<div>
+<h2 class="text-xl font-bold text-primary">Recent Activity Near You</h2>
+<p class="text-xs text-on-surface-variant font-medium">Within a 10km radius of Aspen Ridge</p>
+</div>
+<div class="flex bg-surface-container p-1 rounded-lg">
+<button class="px-3 py-1 bg-surface-container-lowest text-primary text-xs font-bold rounded shadow-sm">Map</button>
+<button class="px-3 py-1 text-on-surface-variant text-xs font-bold rounded">List</button>
+</div>
+</div>
+<!-- Mini Map View -->
+<div class="flex-grow relative min-h-[350px] bg-surface-container-high m-6 mt-0 rounded-xl overflow-hidden shadow-inner">
+<img alt="Map View" class="w-full h-full object-cover grayscale brightness-90 contrast-125 opacity-40" data-alt="simplified topographical map with muted earth tones and subtle elevation lines" data-location="Aspen Ridge" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDEMkpqyrn3csQtsCD3hqS92e1NWotYvTDldtaqGkmadd0Zz2c7kBDF29HW96vnjiDbgRH6FwQMfxN4JHyPg2CWNdv3BmOSJuQAS0bp3ZXMO_BQXlr51Z4RyB0n-poB02wmhEICCq-kNFyl5R7NRVKGVe_OEaGjUkjp-ikjRm-0JWi0oTquolOZinX0x2aGM8pE6lMO1JdS8_WN9i1X6F5onjYTiHqvKODf2qQRtpY29bYbDUtTv8rWi1oDrmn8DzQeCFD5fROTEuj8"/>
+<!-- Map Pins -->
+<div class="absolute top-1/4 left-1/3 group cursor-pointer">
+<div class="bg-tertiary text-white p-2 rounded-full shadow-lg animate-bounce">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">warning</span>
+</div>
+<div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-32 bg-white p-2 rounded shadow-xl text-[10px] hidden group-hover:block z-10">
+<p class="font-bold text-primary">Grizzly Sighting</p>
+<p class="text-on-surface-variant">2.4km away • 4h ago</p>
+</div>
+</div>
+<div class="absolute bottom-1/3 right-1/4 group cursor-pointer">
+<div class="bg-secondary text-white p-2 rounded-full shadow-lg">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">visibility</span>
+</div>
+<div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-32 bg-white p-2 rounded shadow-xl text-[10px] hidden group-hover:block z-10">
+<p class="font-bold text-primary">Black Bear</p>
+<p class="text-on-surface-variant">5.1km away • Yesterday</p>
+</div>
+</div>
+<!-- My Location Pin -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+<div class="w-8 h-8 bg-primary/20 rounded-full flex items-center justify-center animate-pulse">
+<div class="w-3 h-3 bg-primary rounded-full"></div>
+</div>
+<span class="absolute top-full left-1/2 -translate-x-1/2 mt-1 text-[10px] font-black text-primary uppercase whitespace-nowrap">My Home</span>
+</div>
+<!-- Floating Map Controls -->
+<div class="absolute bottom-4 right-4 flex flex-col gap-2">
+<button class="w-10 h-10 bg-white/80 backdrop-blur-md shadow-md rounded-lg flex items-center justify-center text-primary hover:bg-white transition-all">
+<span class="material-symbols-outlined">add</span>
+</button>
+<button class="w-10 h-10 bg-white/80 backdrop-blur-md shadow-md rounded-lg flex items-center justify-center text-primary hover:bg-white transition-all">
+<span class="material-symbols-outlined">remove</span>
+</button>
+</div>
+</div>
+<!-- Summary Stats -->
+<div class="px-6 pb-6 flex gap-4">
+<div class="flex-1 bg-surface-container-lowest p-3 rounded-lg border-l-4 border-tertiary">
+<p class="text-[10px] uppercase font-bold text-on-surface-variant">Active Alerts</p>
+<p class="text-xl font-bold text-primary">02</p>
+</div>
+<div class="flex-1 bg-surface-container-lowest p-3 rounded-lg border-l-4 border-secondary">
+<p class="text-[10px] uppercase font-bold text-on-surface-variant">Sightings (7d)</p>
+<p class="text-xl font-bold text-primary">08</p>
+</div>
+<div class="flex-1 bg-surface-container-lowest p-3 rounded-lg border-l-4 border-primary">
+<p class="text-[10px] uppercase font-bold text-on-surface-variant">Safety Level</p>
+<p class="text-xl font-bold text-primary">High</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Support Section -->
+<section class="mt-12 mb-12 p-10 bg-surface-container-lowest rounded-2xl flex flex-col md:flex-row items-center justify-between gap-10">
+<div class="md:w-1/2">
+<h3 class="text-2xl font-bold text-primary mb-2">Need a Property Assessment?</h3>
+<p class="text-on-surface-variant font-medium">A volunteer ranger can visit your property to help identify attractants and suggest bear-proof solutions tailored to your land.</p>
+<div class="mt-6 flex gap-4">
+<button class="px-6 py-3 bg-primary text-white font-bold text-sm rounded-lg hover:opacity-90 transition-opacity">Schedule Visit</button>
+<button class="px-6 py-3 border border-outline-variant text-primary font-bold text-sm rounded-lg hover:bg-surface-container-low transition-colors">Download PDF Guide</button>
+</div>
+</div>
+<div class="md:w-1/3 relative">
+<div class="aspect-video rounded-xl overflow-hidden shadow-xl transform rotate-2">
+<img alt="Bear Protection" data-alt="outdoor storage bin with heavy duty metal bear-proof latch system in a wooded backyard setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7OEtbor7KD7TMg7Yw3Hsdt9ziGS3UmrCMyYKucjPbX5vZX7mjXvljkPZs4u97pHYQBWmGUJSX05w3mdNJGNV_vgMzTkv8quKHXHIxWH6TN3ds4g9EceK1oLnVhJ1mS37hhOhuPfm7wPcnDxxGQJrYVwT_ptn8B31SZE4j66Kru7i0LOUTroPjxmDfmJK_Yj1EzaKKgyksH1SS_pJAqrycXKwOtPsX7SLBTxgmGZhEUzVnvCdoiCMkzVsKRXfbxon0-xSSv5KVaiuz"/>
+</div>
+<div class="absolute -bottom-4 -left-4 bg-tertiary text-white p-4 rounded-lg shadow-xl -rotate-3">
+<p class="text-[10px] uppercase font-bold tracking-widest opacity-80 mb-1">Ranger Tip</p>
+<p class="text-xs font-bold leading-tight">Install motion lights at<br/>least 8 feet high.</p>
+</div>
+</div>
+</section>
+</div>
+</main>
+</div>
+<!-- Mobile Navigation (Bottom) -->
+<footer class="md:hidden fixed bottom-0 left-0 right-0 bg-white shadow-[0_-4px_20px_rgba(0,0,0,0.05)] z-50 flex justify-around p-4">
+<button class="flex flex-col items-center gap-1 text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="text-[10px] font-bold">Home</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-[#424842]">
+<span class="material-symbols-outlined">map</span>
+<span class="text-[10px] font-bold">Map</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-[#424842]">
+<span class="material-symbols-outlined">add_circle</span>
+<span class="text-[10px] font-bold">Report</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-[#424842]">
+<span class="material-symbols-outlined">person</span>
+<span class="text-[10px] font-bold">Profile</span>
+</button>
+</footer>
+</body></html>

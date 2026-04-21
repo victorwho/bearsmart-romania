@@ -1,0 +1,646 @@
+openapi: 3.1.0
+info:
+  title: Revox Routine API
+  description: Deterministic Revox product filtering and routine recommendation API
+    built from the provided database and links.txt. Designed to reduce hallucinations
+    in GPT Actions.
+  version: 1.1.0
+paths:
+  /health:
+    get:
+      tags:
+      - meta
+      summary: Health
+      operationId: getHealth
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthResponse'
+  /retailers:
+    get:
+      tags:
+      - meta
+      summary: Retailers
+      operationId: listRetailers
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RetailerListResponse'
+  /retailer-links:
+    get:
+      tags:
+      - meta
+      summary: Retailer Links
+      operationId: listRetailerLinks
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RetailerLinkListResponse'
+  /retailer-links/{retailer}:
+    get:
+      tags:
+      - meta
+      summary: Retailer Link
+      operationId: getRetailerLink
+      parameters:
+      - name: retailer
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Retailer
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RetailerLinkResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /products/{product_id}:
+    get:
+      tags:
+      - catalog
+      summary: Get Product
+      operationId: getProductById
+      parameters:
+      - name: product_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Product Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /products/search:
+    post:
+      tags:
+      - catalog
+      summary: Search Products
+      operationId: searchProducts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductSearchRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductSearchResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /routine/recommend:
+    post:
+      tags:
+      - routine
+      summary: Recommend Routine
+      operationId: recommendRoutine
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RoutineRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoutineResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    HealthResponse:
+      properties:
+        status:
+          type: string
+          title: Status
+        product_count:
+          type: integer
+          title: Product Count
+        retailer_count:
+          type: integer
+          title: Retailer Count
+        retailer_link_count:
+          type: integer
+          title: Retailer Link Count
+        version:
+          type: string
+          title: Version
+      type: object
+      required:
+      - status
+      - product_count
+      - retailer_count
+      - retailer_link_count
+      - version
+      title: HealthResponse
+    ProductResponse:
+      properties:
+        id_produs:
+          type: string
+          title: Id Produs
+          description: Internal stable product ID
+        nume_produs:
+          type: string
+          title: Nume Produs
+          description: Exact product name from database
+        tip_produs:
+          type: string
+          title: Tip Produs
+        needs:
+          items:
+            type: string
+          type: array
+          title: Needs
+        skin_types:
+          items:
+            type: string
+          type: array
+          title: Skin Types
+        retailer_disponibil:
+          items:
+            type: string
+          type: array
+          title: Retailer Disponibil
+        moment_utilizare:
+          type: string
+          title: Moment Utilizare
+        hidratant:
+          type: boolean
+          title: Hidratant
+        curatare:
+          type: boolean
+          title: Curatare
+        soare:
+          type: boolean
+          title: Soare
+        are_retinol:
+          type: boolean
+          title: Are Retinol
+        nu_combina_cu:
+          items:
+            type: string
+          type: array
+          title: Nu Combina Cu
+        descriere:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Descriere
+        ingrediente:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Ingrediente
+      type: object
+      required:
+      - id_produs
+      - nume_produs
+      - tip_produs
+      - needs
+      - skin_types
+      - retailer_disponibil
+      - moment_utilizare
+      - hidratant
+      - curatare
+      - soare
+      - are_retinol
+      - nu_combina_cu
+      title: ProductResponse
+    ProductSearchRequest:
+      properties:
+        retailer:
+          anyOf:
+          - type: string
+            enum:
+            - DM
+            - Farmacia Tei
+            - Bebe Tei
+            - eMag
+            - Dr. Max
+            - Douglas
+            - Sephora
+            - Marionnaud
+            - Kaufland
+            - Auchan
+            - Carrefour
+          - type: 'null'
+          title: Retailer
+        skin_type:
+          anyOf:
+          - type: string
+            enum:
+            - Normal
+            - Uscat
+            - Gras
+            - Ten Mixt
+            - Sensibil
+          - type: 'null'
+          title: Skin Type
+        need:
+          anyOf:
+          - type: string
+            enum:
+            - Ten tern
+            - Deshidratare
+            - Acnee
+            - Ten neuniform
+            - Imperfectiuni
+            - Riduri/linii fine
+            - Ochi obositi/umflati
+            - Roseata
+            - Pete pigmentare
+          - type: 'null'
+          title: Need
+        tip_produs:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Tip Produs
+        moment:
+          anyOf:
+          - type: string
+            enum:
+            - AM
+            - PM
+          - type: 'null'
+          title: Moment
+        exact_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Exact Name
+        exclude_retinol:
+          type: boolean
+          title: Exclude Retinol
+          default: false
+        include_ids_only:
+          type: boolean
+          title: Include Ids Only
+          default: false
+        limit:
+          type: integer
+          maximum: 100.0
+          minimum: 1.0
+          title: Limit
+          default: 20
+      type: object
+      title: ProductSearchRequest
+    ProductSearchResponse:
+      properties:
+        count:
+          type: integer
+          title: Count
+        products:
+          items:
+            $ref: '#/components/schemas/ProductResponse'
+          type: array
+          title: Products
+      type: object
+      required:
+      - count
+      - products
+      title: ProductSearchResponse
+    RetailerLinkListResponse:
+      properties:
+        count:
+          type: integer
+          title: Count
+        links:
+          items:
+            $ref: '#/components/schemas/RetailerLinkResponse'
+          type: array
+          title: Links
+      type: object
+      required:
+      - count
+      - links
+      title: RetailerLinkListResponse
+    RetailerLinkResponse:
+      properties:
+        retailer:
+          type: string
+          title: Retailer
+          description: Canonical retailer name
+        mode:
+          type: string
+          enum:
+          - url
+          - in_store_only
+          title: Mode
+          description: How purchase is handled
+        url:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Url
+          description: Direct purchase/search URL if available
+        cta_text:
+          type: string
+          title: Cta Text
+          description: Recommended call-to-action text for the GPT UI
+        source_label:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Source Label
+          description: Raw retailer label as seen in links.txt
+        notes:
+          items:
+            type: string
+          type: array
+          title: Notes
+      type: object
+      required:
+      - retailer
+      - mode
+      - cta_text
+      title: RetailerLinkResponse
+    RetailerListResponse:
+      properties:
+        retailers:
+          items:
+            type: string
+          type: array
+          title: Retailers
+      type: object
+      required:
+      - retailers
+      title: RetailerListResponse
+    RoutineRequest:
+      properties:
+        retailer:
+          type: string
+          enum:
+          - DM
+          - Farmacia Tei
+          - Bebe Tei
+          - eMag
+          - Dr. Max
+          - Douglas
+          - Sephora
+          - Marionnaud
+          - Kaufland
+          - Auchan
+          - Carrefour
+          title: Retailer
+        skin_type:
+          type: string
+          enum:
+          - Normal
+          - Uscat
+          - Gras
+          - Ten Mixt
+          - Sensibil
+          title: Skin Type
+        priority_need:
+          type: string
+          enum:
+          - Ten tern
+          - Deshidratare
+          - Acnee
+          - Ten neuniform
+          - Imperfectiuni
+          - Riduri/linii fine
+          - Ochi obositi/umflati
+          - Roseata
+          - Pete pigmentare
+          title: Priority Need
+        scores:
+          additionalProperties:
+            type: integer
+          type: object
+          title: Scores
+        detected_needs:
+          items:
+            type: string
+            enum:
+            - Ten tern
+            - Deshidratare
+            - Acnee
+            - Ten neuniform
+            - Imperfectiuni
+            - Riduri/linii fine
+            - Ochi obositi/umflati
+            - Roseata
+            - Pete pigmentare
+          type: array
+          title: Detected Needs
+        eye_need:
+          anyOf:
+          - type: string
+            enum:
+            - Ochi obositi/umflati
+            - Riduri/linii fine
+          - type: 'null'
+          title: Eye Need
+        allow_partial_routine:
+          type: boolean
+          title: Allow Partial Routine
+          default: true
+        include_debug:
+          type: boolean
+          title: Include Debug
+          default: false
+      additionalProperties: false
+      type: object
+      required:
+      - retailer
+      - skin_type
+      - priority_need
+      title: RoutineRequest
+    RoutineResponse:
+      properties:
+        status:
+          type: string
+          enum:
+          - ok
+          - no_products
+          - needs_other_retailer
+          - partial
+          title: Status
+        retailer:
+          type: string
+          title: Retailer
+        priority_need:
+          type: string
+          title: Priority Need
+        skin_type:
+          type: string
+          title: Skin Type
+        products:
+          items:
+            $ref: '#/components/schemas/SlotProduct'
+          type: array
+          title: Products
+        missing_slots:
+          items:
+            type: string
+          type: array
+          title: Missing Slots
+        notes:
+          items:
+            type: string
+          type: array
+          title: Notes
+        alternative_retailers:
+          items:
+            type: string
+          type: array
+          title: Alternative Retailers
+        retailer_link:
+          anyOf:
+          - $ref: '#/components/schemas/RetailerLinkResponse'
+          - type: 'null'
+        alternative_retailer_links:
+          items:
+            $ref: '#/components/schemas/RetailerLinkResponse'
+          type: array
+          title: Alternative Retailer Links
+        retinol_disclaimer_required:
+          type: boolean
+          title: Retinol Disclaimer Required
+          default: false
+        retinol_disclaimer:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Retinol Disclaimer
+        feedback_cta_text:
+          type: string
+          title: Feedback Cta Text
+          default: Părerea ta contează! Spune-ne cum ți s-a părut experiența și ajută-ne
+            să o facem și mai bună :apasă aici!
+        debug:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Debug
+      type: object
+      required:
+      - status
+      - retailer
+      - priority_need
+      - skin_type
+      - products
+      title: RoutineResponse
+    SlotProduct:
+      properties:
+        slot:
+          type: string
+          enum:
+          - Curatare
+          - Ochi
+          - Ser
+          - Produs problema
+          - Hidratare
+          - Soare
+          title: Slot
+        phase:
+          type: string
+          enum:
+          - AM
+          - PM
+          - AM/PM
+          title: Phase
+        id_produs:
+          type: string
+          title: Id Produs
+        nume_produs:
+          type: string
+          title: Nume Produs
+        tip_produs:
+          type: string
+          title: Tip Produs
+        matched_need:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Matched Need
+        notes:
+          items:
+            type: string
+          type: array
+          title: Notes
+      type: object
+      required:
+      - slot
+      - phase
+      - id_produs
+      - nume_produs
+      - tip_produs
+      title: SlotProduct
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+servers:
+- url: https://YOUR-CLOUD-RUN-URL
+  description: Replace with your deployed Cloud Run URL

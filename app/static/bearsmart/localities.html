@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BearSmart Romania | Certified Localities</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1" rel="stylesheet">
+  <link rel="stylesheet" href="/bearsmart-static/styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="app-header">
+      <div class="brand-row">
+        <img class="brand-logo" src="/logo/bearsmart-logo-light.svg" alt="BearSmart logo">
+        <div class="brand-text">
+          <h1 class="brand-title">BearSmart Romania</h1>
+        </div>
+        <nav class="top-nav">
+          <a class="nav-link" href="/bearsmart/map">Map</a>
+          <a class="nav-link" href="/bearsmart/dashboard">Bear Safety Guides</a>
+          <a class="nav-link active" href="/bearsmart/localities">BearSmart Localities</a>
+        </nav>
+      </div>
+      <div class="header-right">
+        <a class="button button-primary" href="/bearsmart/report">Report Sighting</a>
+        <a class="button button-alert" href="tel:112">Emergency</a>
+      </div>
+    </header>
+
+    <div class="page-layout no-rail">
+      <main class="page-content">
+        <section class="simple-intro locality-intro">
+          <div>
+            <h2 class="section-title">Certified Localities</h2>
+            <p class="section-copy">Recognizing Romanian communities that are building stronger coexistence systems, reporting discipline, and safer resident behavior.</p>
+          </div>
+          <div id="sortChips" class="sort-chips compact-actions">
+            <button class="chip" data-sort="region">Region</button>
+            <button class="chip active" data-sort="score">Safety Score</button>
+          </div>
+        </section>
+
+        <section class="directory-toolbar">
+          <label class="toolbar-field" for="countyFilter">
+            <span class="section-kicker">County</span>
+            <select id="countyFilter" class="toolbar-select">
+              <option value="all">All counties</option>
+            </select>
+          </label>
+          <label class="toolbar-field" for="regionFilter">
+            <span class="section-kicker">Region</span>
+            <select id="regionFilter" class="toolbar-select">
+              <option value="all">All regions</option>
+            </select>
+          </label>
+        </section>
+
+        <section class="directory-grid" id="localitiesGrid"></section>
+
+        <section class="impact-strip">
+          <div class="impact-copy">
+            <p class="section-kicker">Network Impact</p>
+            <p id="impactNote" class="section-copy"></p>
+          </div>
+          <div class="impact-metrics">
+            <div class="impact-stat">
+              <span class="eyebrow">Communities</span>
+              <strong id="impactCommunityCount"></strong>
+            </div>
+            <div class="impact-stat">
+              <span class="eyebrow">Protected Area</span>
+              <strong id="impactAcres"></strong>
+            </div>
+            <div class="impact-stat">
+              <span class="eyebrow" id="trendLabel">Conflict Trend</span>
+              <strong id="impactTrend"></strong>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script src="/bearsmart-static/shared.js"></script>
+  <script src="/bearsmart-static/emergency-gate.js"></script>
+  <script src="/bearsmart-static/localities.js"></script>
+</body>
+</html>

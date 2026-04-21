@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BearSmart Romania | Community Feed</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1" rel="stylesheet">
+  <link rel="stylesheet" href="/bearsmart-static/styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="app-header">
+      <div class="brand-row">
+        <img class="brand-logo" src="/logo/bearsmart-logo-light.svg" alt="BearSmart logo">
+        <div class="brand-text">
+          <h1 class="brand-title">BearSmart Romania</h1>
+        </div>
+        <nav class="top-nav">
+          <a class="nav-link" href="/bearsmart/map">Map</a>
+          <a class="nav-link" href="/bearsmart/dashboard">Bear Safety Guides</a>
+          <a class="nav-link" href="/bearsmart/localities">BearSmart Localities</a>
+        </nav>
+      </div>
+      <div class="header-right">
+        <a class="button button-primary" href="/bearsmart/report">Report Sighting</a>
+        <a class="button button-alert" href="tel:112">Emergency</a>
+      </div>
+    </header>
+
+    <div class="page-layout no-rail">
+      <main class="page-content">
+        <div class="community-grid">
+          <section class="list-stack">
+            <div class="page-hero" style="margin-bottom: 12px;">
+              <div>
+                <p class="eyebrow">Community Surface</p>
+                <h2 class="hero-title">Community Feed</h2>
+                <p class="section-copy">See how residents, volunteers, and local coordinators are reducing conflict through practical action.</p>
+              </div>
+            </div>
+            <div id="pinnedAlert" class="pinned-alert"></div>
+            <div id="feedPosts" class="list-stack"></div>
+          </section>
+
+          <aside class="sidebar-stack community-support">
+            <div class="content-card">
+              <p class="eyebrow">Community at a glance</p>
+              <h3 class="section-title">Local momentum</h3>
+              <div id="heroesList" class="list-stack"></div>
+              <div class="section-divider"></div>
+              <div id="workshopsList" class="list-stack"></div>
+            </div>
+            <div id="communityCta" class="cta-card"></div>
+          </aside>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="/bearsmart-static/shared.js"></script>
+  <script src="/bearsmart-static/community.js"></script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: bearsmart
+    runtime: docker
+    plan: free
+    autoDeploy: true
+    envVars:
+      - key: BEARSMART_SESSION_SECRET
+        generateValue: true
+      - key: ENABLE_DOCS
+        value: "false"
+      - key: BEARSMART_FLAG_EMERGENCY_GATE
+        value: "true"
+      - key: BEARSMART_FLAG_GEO_FUZZ
+        value: "true"
+    healthCheckPath: /health

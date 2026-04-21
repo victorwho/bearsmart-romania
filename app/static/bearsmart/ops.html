@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BearSmart Romania | Ops Console</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/bearsmart-static/styles.css">
+</head>
+<body class="has-mobile-nav">
+  <div class="page-shell">
+    <header class="app-header">
+      <div class="brand-row">
+        <img class="brand-logo" src="/logo/bearsmart-logo-light.svg" alt="BearSmart logo">
+        <div class="brand-text">
+          <p class="eyebrow">Debug / Demo Ops</p>
+          <h1 class="brand-title">Operations Console</h1>
+        </div>
+      </div>
+      <div class="header-right">
+        <a class="button button-secondary" href="/bearsmart/map">Back to public app</a>
+      </div>
+    </header>
+
+    <div class="page-layout no-rail">
+      <main class="page-content">
+        <section class="page-hero">
+          <div>
+            <p class="eyebrow">Internal Surface</p>
+            <h2 class="hero-title">Town Admin, Moderation, Reviewer</h2>
+            <p class="section-copy">The public map no longer carries admin controls. This route preserves those demo workflows separately.</p>
+          </div>
+          <div class="field-grid two" style="max-width:420px;">
+            <select id="opsRoleSelect">
+              <option value="town_admin">Town Admin</option>
+              <option value="moderator">Moderator</option>
+              <option value="reviewer">Reviewer</option>
+            </select>
+            <select id="opsTownSelect"></select>
+          </div>
+        </section>
+
+        <div class="ops-grid">
+          <section class="ops-card">
+            <p class="eyebrow">Town Admin</p>
+            <h3 class="section-title">Admin Metrics</h3>
+            <div id="opsMetrics" class="stats-grid two"></div>
+            <div class="report-form-grid">
+              <input id="opsAlertTitle" type="text" placeholder="Alert title">
+              <select id="opsAlertSeverity">
+                <option value="info">Info</option>
+                <option value="advisory">Advisory</option>
+                <option value="warning">Warning</option>
+                <option value="critical">Critical</option>
+              </select>
+              <textarea id="opsAlertMessage" rows="4" placeholder="Alert message"></textarea>
+              <button id="opsPublishAlert" class="button button-primary" type="button">Publish alert</button>
+            </div>
+          </section>
+
+          <section class="ops-card">
+            <p class="eyebrow">Moderator</p>
+            <h3 class="section-title">Moderation Queue</h3>
+            <div id="opsModerationStats" class="sla-stats-row"></div>
+            <div id="opsModerationList" class="ops-list"></div>
+          </section>
+
+          <section class="ops-card">
+            <p class="eyebrow">Reviewer</p>
+            <h3 class="section-title">Certification Review</h3>
+            <div id="opsCertificationCard" class="list-stack"></div>
+            <div class="report-form-grid">
+              <select id="opsCertDecision">
+                <option value="under_review">Keep under review</option>
+                <option value="certified">Mark certified</option>
+                <option value="renewal_due">Mark renewal due</option>
+              </select>
+              <textarea id="opsCertNotes" rows="4" placeholder="Decision notes"></textarea>
+              <button id="opsSaveDecision" class="button button-primary" type="button">Save decision</button>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="/bearsmart-static/shared.js"></script>
+  <script src="/bearsmart-static/emergency-gate.js"></script>
+  <script src="/bearsmart-static/ops.js"></script>
+</body>
+</html>

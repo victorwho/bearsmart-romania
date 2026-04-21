@@ -1,0 +1,5 @@
+# Exclude local artifacts
+.venv/
+__pycache__/
+*.pyc
+*.zip

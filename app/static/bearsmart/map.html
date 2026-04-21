@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BearSmart Romania | Interactive Map</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
+  <link rel="stylesheet" href="/bearsmart-static/styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="app-header">
+      <div class="brand-row">
+        <img class="brand-logo" src="/logo/bearsmart-logo-light.svg" alt="BearSmart logo">
+        <div class="brand-text">
+          <h1 class="brand-title">BearSmart Romania</h1>
+        </div>
+        <nav class="top-nav">
+          <a class="nav-link active" href="/bearsmart/map">Map</a>
+          <a class="nav-link" href="/bearsmart/dashboard">Bear Safety Guides</a>
+          <a class="nav-link" href="/bearsmart/localities">BearSmart Localities</a>
+        </nav>
+      </div>
+      <div class="header-right">
+        <label class="header-select-wrap" for="mapTownSelect">
+          <span class="sr-only">Select locality</span>
+          <select id="mapTownSelect" class="header-select" aria-label="Select locality"></select>
+        </label>
+        <a class="button button-primary" href="/bearsmart/report">Report Sighting</a>
+        <a class="button button-alert" href="tel:112">Emergency</a>
+      </div>
+    </header>
+
+    <div class="page-layout no-rail">
+      <main class="page-content">
+        <div class="map-layout solo-map">
+          <section class="map-panel map-panel-immersive">
+            <div class="map-wrap map-wrap-immersive">
+              <div class="map-overlay map-note-stack">
+                <div id="mapTownChip" class="town-chip">Loading locality…</div>
+                <div id="mapStatusChip" class="map-status-chip hidden">Locating you…</div>
+                <div class="map-note-card minimal">
+                  <strong>Tap anywhere to report a sighting</strong>
+                  <p class="section-copy">Certified zones are shaded. Published reports appear as points.</p>
+                </div>
+              </div>
+              <div id="alertTicker" class="map-overlay alert-ticker">Loading urgent local context…</div>
+              <div class="map-overlay map-toolbar">
+                <button id="mapFilterToggle" class="button button-secondary map-toolbar-button" type="button">Filters</button>
+                <button id="legendToggleButton" class="button button-secondary map-toolbar-button" type="button">Legend</button>
+              </div>
+              <div id="mapFilterDrawer" class="map-overlay filter-drawer hidden">
+                <p class="section-kicker">Show report types</p>
+                <div class="filter-drawer-grid">
+                  <button class="chip active" data-report-filter="all" type="button">All reports</button>
+                  <button class="chip" data-report-filter="sighting" type="button">Sightings</button>
+                  <button class="chip" data-report-filter="road_crossing" type="button">Road crossings</button>
+                  <button class="chip" data-report-filter="attractant_issue" type="button">Attractants</button>
+                </div>
+              </div>
+              <div id="map" class="leaflet-map"></div>
+              <div id="legendCard" class="legend-card compact-legend">
+                <div class="legend-header">
+                  <strong>Legend</strong>
+                </div>
+                <div id="legendContent" class="legend-list">
+                  <div class="legend-item"><span class="legend-dot"></span>Published report</div>
+                  <div class="legend-item"><span class="legend-zone"></span>Certified BearSmart zone</div>
+                  <div class="legend-item"><span class="legend-cluster"></span>Clustered reports</div>
+                </div>
+              </div>
+              <div class="map-controls map-overlay">
+                <button id="centerLocationButton" class="icon-button" type="button" aria-label="Center on my location" title="Center on my location">
+                  <span class="material-symbols-outlined" aria-hidden="true">my_location</span>
+                </button>
+              </div>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- H1.2: Now / Plan / Report bottom sheet (mobile-first) -->
+  <aside id="homeSheet" class="home-sheet" aria-label="Town surfaces" data-active-tab="now">
+    <div class="home-sheet-handle" role="presentation"></div>
+    <div class="home-sheet-tabs" role="tablist">
+      <button type="button" class="home-sheet-tab active" role="tab" aria-selected="true" data-tab="now" data-hash="#now">Now</button>
+      <button type="button" class="home-sheet-tab" role="tab" aria-selected="false" data-tab="plan" data-hash="#plan">Plan</button>
+      <button type="button" class="home-sheet-tab" role="tab" aria-selected="false" data-tab="report" data-hash="#report">Report</button>
+    </div>
+    <div class="home-sheet-panels">
+      <section id="tabNow" class="home-sheet-panel active" role="tabpanel" aria-labelledby="now">
+        <p class="eyebrow">Right now</p>
+        <h2 class="section-title" id="nowTownName">Loading locality…</h2>
+        <div id="nowAlertList" class="stack-list" aria-live="polite"></div>
+        <h3 class="section-title compact-top">Published reports</h3>
+        <div id="nowReportList" class="stack-list"></div>
+      </section>
+      <section id="tabPlan" class="home-sheet-panel" role="tabpanel" aria-labelledby="plan" hidden>
+        <p class="eyebrow">Stay prepared</p>
+        <h2 class="section-title">Preparedness plan</h2>
+        <p class="section-copy">Choose your profile to get a checklist tailored to this town.</p>
+        <a class="button button-primary" href="/bearsmart/dashboard">Open preparedness guide</a>
+        <h3 class="section-title compact-top">Local contacts</h3>
+        <div id="planContactsList" class="stack-list"></div>
+      </section>
+      <section id="tabReport" class="home-sheet-panel" role="tabpanel" aria-labelledby="report" hidden>
+        <p class="eyebrow">Report a sighting</p>
+        <h2 class="section-title">Help keep your town safer</h2>
+        <p class="section-copy">Every report passes moderation before appearing on the public map. Your pin is fuzzed to ~500 m so private homes stay private.</p>
+        <a id="openReportFlow" class="button button-primary" href="/bearsmart/report">Start a report</a>
+        <div class="list-card compact-top"><strong>How it works</strong><p class="section-copy">1. Place a point. 2. Describe what you saw. 3. A moderator reviews before publishing.</p></div>
+      </section>
+    </div>
+  </aside>
+  <button id="homeSheetToggle" class="home-sheet-toggle" type="button" aria-controls="homeSheet" aria-expanded="true">Town details</button>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+  <script src="/bearsmart-static/shared.js"></script>
+  <script src="/bearsmart-static/emergency-gate.js"></script>
+  <script src="/bearsmart-static/home-sheet.js"></script>
+  <script src="/bearsmart-static/map.js"></script>
+</body>
+</html>

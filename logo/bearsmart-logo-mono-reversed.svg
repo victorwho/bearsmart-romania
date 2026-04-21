@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 186">
+  <!-- BearSmart Shield & Paw — Monochrome Reversed (white) -->
+  <path d="M90 0 L175 32 L175 102 Q175 158 90 186 Q5 158 5 102 L5 32 Z" fill="none" stroke="#ffffff" stroke-width="3.5" stroke-linejoin="round"/>
+  <ellipse cx="90" cy="120" rx="30" ry="24" fill="#ffffff"/>
+  <ellipse cx="55" cy="82" rx="15" ry="18" fill="#ffffff" transform="rotate(-15 55 82)"/>
+  <ellipse cx="80" cy="66" rx="13" ry="16" fill="#ffffff" transform="rotate(-5 80 66)"/>
+  <ellipse cx="106" cy="66" rx="13" ry="16" fill="#ffffff" transform="rotate(5 106 66)"/>
+  <ellipse cx="130" cy="82" rx="15" ry="18" fill="#ffffff" transform="rotate(15 130 82)"/>
+</svg>

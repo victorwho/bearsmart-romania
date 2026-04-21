@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>BearSmart Romania — Strategic Dossier</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Public+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --surface:#fff9ed;
+    --surface-low:#f9f3e6;
+    --surface-container:#f3ede1;
+    --surface-high:#e8e2d6;
+    --surface-lowest:#ffffff;
+    --primary:#17341d;
+    --primary-container:#2d4b32;
+    --primary-fixed:#c8ecc9;
+    --secondary:#805533;
+    --secondary-container:#fdc39a;
+    --tertiary:#4a2400;
+    --tertiary-container:#6a3700;
+    --error:#ba1a1a;
+    --on-surface:#1d1c14;
+    --on-surface-variant:#424842;
+    --outline:#c2c8bf;
+    --amber:#c68b2a;
+    --moss:#47664b;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--surface);color:var(--on-surface);font-family:'Public Sans',sans-serif;font-size:15px;line-height:1.55}
+  body{
+    background-image:
+      radial-gradient(1100px 600px at 85% -10%, rgba(47,77,52,0.06), transparent 60%),
+      radial-gradient(900px 500px at -5% 30%, rgba(128,85,51,0.05), transparent 60%),
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240' viewBox='0 0 240 240'><g fill='none' stroke='%232f4d34' stroke-opacity='0.04' stroke-width='1'><path d='M-20 60 Q60 20 140 80 T320 120'/><path d='M-20 110 Q60 70 140 130 T320 170'/><path d='M-20 160 Q60 120 140 180 T320 220'/><path d='M-20 210 Q60 170 140 230 T320 270'/></g></svg>");
+    background-attachment: fixed;
+  }
+  h1,h2,h3,h4{font-family:'Manrope',sans-serif;color:var(--primary);letter-spacing:-0.02em;font-weight:700}
+  .mono{font-family:'JetBrains Mono',monospace}
+  .eyebrow{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--secondary);font-weight:500}
+  .kicker{font-family:'Manrope',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--secondary)}
+
+  /* ── shell ─────────────────────────────────────────── */
+  .wrap{max-width:1280px;margin:0 auto;padding:48px 56px 96px}
+
+  /* ── top bar ───────────────────────────────────────── */
+  .topbar{display:flex;align-items:center;justify-content:space-between;padding:18px 28px;background:rgba(255,249,237,0.75);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-radius:18px;position:sticky;top:16px;z-index:20;box-shadow:0 12px 32px rgba(29,28,20,0.05)}
+  .brand{display:flex;gap:14px;align-items:center}
+  .brand img{width:38px;height:auto}
+  .brand-title{font-family:'Manrope',sans-serif;font-weight:800;color:var(--primary);font-size:18px;letter-spacing:-0.01em;line-height:1.1}
+  .brand-sub{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--secondary)}
+  .tabs{display:flex;gap:4px;background:var(--surface-container);padding:4px;border-radius:12px}
+  .tab{font:500 13px 'Public Sans',sans-serif;padding:8px 16px;border-radius:9px;cursor:pointer;color:var(--on-surface-variant);background:transparent;border:0;transition:all .18s}
+  .tab:hover{color:var(--primary)}
+  .tab.active{background:var(--surface-lowest);color:var(--primary);font-weight:600;box-shadow:0 2px 8px rgba(29,28,20,0.05)}
+  .meta-right{display:flex;gap:10px;align-items:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--on-surface-variant)}
+  .meta-dot{width:8px;height:8px;border-radius:50%;background:#3b7a43;box-shadow:0 0 0 3px rgba(59,122,67,0.18)}
+
+  /* ── hero ──────────────────────────────────────────── */
+  .hero{margin-top:48px;display:grid;grid-template-columns:1.4fr 1fr;gap:56px;align-items:end}
+  .hero h1{font-size:72px;line-height:0.98;letter-spacing:-0.035em;font-weight:800}
+  .hero .eyebrow{margin-bottom:20px}
+  .hero h1 em{font-style:italic;font-weight:500;color:var(--secondary);font-family:'Manrope',sans-serif}
+  .hero-meta{background:var(--surface-container);border-radius:16px;padding:26px}
+  .hero-meta dt{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--secondary);margin-bottom:6px}
+  .hero-meta dd{font-family:'Manrope',sans-serif;font-weight:600;color:var(--primary);font-size:15px;margin-bottom:18px}
+  .hero-meta dd:last-child{margin-bottom:0}
+  .lede{margin-top:32px;font-size:19px;line-height:1.55;color:var(--on-surface-variant);max-width:64ch;text-wrap:pretty}
+  .lede strong{color:var(--primary);font-weight:600}
+
+  /* ── section titles ────────────────────────────────── */
+  .section{margin-top:88px}
+  .section-head{display:flex;align-items:baseline;justify-content:space-between;gap:40px;margin-bottom:28px;padding-bottom:16px}
+  .section-head h2{font-size:40px;line-height:1.05;letter-spacing:-0.025em}
+  .section-head .num{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--secondary);font-weight:500}
+  .section-head p{color:var(--on-surface-variant);font-size:15px;max-width:48ch;text-wrap:pretty}
+
+  /* ── SWOT quadrant ─────────────────────────────────── */
+  .swot{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:transparent;border-radius:20px;overflow:hidden;position:relative}
+  .swot-compass{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:92px;height:92px;border-radius:50%;background:var(--surface);display:flex;align-items:center;justify-content:center;flex-direction:column;z-index:3;box-shadow:0 8px 24px rgba(29,28,20,0.08)}
+  .swot-compass .mono{font-size:10px;letter-spacing:0.18em;color:var(--secondary)}
+  .swot-compass strong{font-family:'Manrope',sans-serif;color:var(--primary);font-size:22px}
+  .quad{padding:36px;min-height:340px;position:relative;display:flex;flex-direction:column;gap:16px}
+  .quad.s{background:var(--primary-fixed);color:var(--primary)}
+  .quad.w{background:var(--secondary-container);color:var(--tertiary)}
+  .quad.o{background:var(--surface-low)}
+  .quad.t{background:#f4e0d6}
+  .quad-label{display:flex;align-items:center;gap:10px}
+  .quad-letter{font-family:'Manrope',sans-serif;font-weight:800;font-size:44px;line-height:1;color:var(--primary);letter-spacing:-0.03em}
+  .quad.w .quad-letter{color:var(--tertiary)}
+  .quad.t .quad-letter{color:#8a2f2f}
+  .quad h3{font-size:22px;letter-spacing:-0.01em;margin-bottom:2px}
+  .quad .kicker{margin-bottom:0}
+  .quad ul{list-style:none;display:flex;flex-direction:column;gap:12px;margin-top:4px}
+  .quad li{display:grid;grid-template-columns:22px 1fr;gap:10px;align-items:start;font-size:14px;line-height:1.5}
+  .quad li .mono{font-size:10px;color:var(--secondary);padding-top:3px}
+  .quad.w li .mono{color:var(--tertiary-container)}
+  .quad li b{font-weight:600;color:inherit;display:block;margin-bottom:2px}
+  .quad li span{color:var(--on-surface-variant)}
+  .quad.s li span,.quad.w li span,.quad.t li span{color:inherit;opacity:0.78}
+
+  /* ── UX Audit ──────────────────────────────────────── */
+  .audit-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+  .screen-card{background:var(--surface-lowest);border-radius:18px;overflow:hidden;box-shadow:0 14px 34px rgba(29,28,20,0.06)}
+  .screen-mock{position:relative;height:280px;overflow:hidden;background:var(--surface-container);border-bottom:0}
+  .screen-tag{position:absolute;top:14px;left:14px;background:var(--primary);color:#fff;font:600 10px 'JetBrains Mono',monospace;letter-spacing:0.12em;padding:5px 10px;border-radius:999px;text-transform:uppercase;z-index:2}
+  .ann{position:absolute;z-index:3;background:#fff;border-radius:8px;padding:6px 10px;font:500 11px 'Public Sans',sans-serif;color:var(--tertiary);box-shadow:0 6px 16px rgba(29,28,20,0.12);display:flex;gap:8px;align-items:center;max-width:200px;line-height:1.35}
+  .ann b{font:700 10px 'JetBrains Mono',monospace;letter-spacing:0.1em;color:var(--error);text-transform:uppercase}
+  .ann.plus b{color:#2d6a37}
+  .ann::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--error);flex-shrink:0}
+  .ann.plus::before{background:#2d6a37}
+  .screen-body{padding:22px 24px 24px}
+  .screen-body h4{font-size:18px;margin-bottom:6px}
+  .screen-body .eyebrow{margin-bottom:10px;display:block}
+  .issue-row{display:flex;align-items:start;gap:12px;padding:12px 0;border-top:0}
+  .issue-row + .issue-row{margin-top:4px;padding-top:14px;position:relative}
+  .issue-row + .issue-row::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:var(--surface-container)}
+  .issue-badge{font:700 9px 'JetBrains Mono',monospace;letter-spacing:0.12em;padding:3px 7px;border-radius:4px;flex-shrink:0;margin-top:2px;text-transform:uppercase}
+  .issue-badge.high{background:#fde4e4;color:#8a2f2f}
+  .issue-badge.med{background:#fff0d6;color:#7a4a12}
+  .issue-badge.low{background:var(--primary-fixed);color:var(--primary)}
+  .issue-text{font-size:13px;line-height:1.5;color:var(--on-surface-variant)}
+  .issue-text b{color:var(--primary);font-weight:600;font-family:'Manrope',sans-serif}
+
+  /* — screen mocks: the actual app rendered at tiny scale — */
+  .mock-map{position:absolute;inset:0;background:
+    radial-gradient(circle at 30% 45%, #dde7d6 0, #c6d4bb 35%, #a8bd99 70%, #8aa57b 100%);
+  }
+  .mock-map::before{content:'';position:absolute;inset:0;background:
+    radial-gradient(circle at 55% 35%, rgba(255,255,255,0.4) 0, transparent 40%),
+    repeating-linear-gradient(55deg, transparent 0 40px, rgba(47,77,52,0.08) 40px 41px);
+  }
+  .mock-cluster{position:absolute;top:38%;left:22%;width:60px;height:60px;border-radius:50%;background:rgba(23,52,29,0.25);display:flex;align-items:center;justify-content:center;color:#fff;font:700 14px 'Manrope',sans-serif}
+  .mock-cluster::before{content:'';position:absolute;inset:-6px;border-radius:50%;background:rgba(23,52,29,0.15)}
+  .mock-dot{position:absolute;width:12px;height:12px;border-radius:50%;background:var(--secondary);box-shadow:0 0 0 4px rgba(128,85,51,0.25)}
+  .mock-dot.d1{top:52%;left:60%}
+  .mock-dot.d2{top:28%;left:72%}
+  .mock-dot.d3{top:68%;left:78%}
+  .mock-chips{position:absolute;bottom:18px;left:18px;right:18px;display:flex;gap:6px;flex-wrap:wrap}
+  .mock-chip{background:rgba(255,255,255,0.85);backdrop-filter:blur(8px);border-radius:999px;padding:5px 12px;font:500 11px 'Public Sans',sans-serif;color:var(--primary)}
+  .mock-chip.on{background:var(--primary);color:#fff}
+  .mock-search{position:absolute;top:16px;left:16px;right:16px;background:rgba(255,255,255,0.85);backdrop-filter:blur(8px);border-radius:10px;padding:10px 14px;font:400 12px 'Public Sans',sans-serif;color:#8a8a82}
+
+  .mock-panel{position:absolute;inset:0;padding:20px;background:var(--surface);display:flex;flex-direction:column;gap:10px;overflow:hidden}
+  .mock-panel h5{font:700 13px 'Manrope',sans-serif;color:var(--primary)}
+  .mock-bar{height:6px;background:var(--surface-container);border-radius:3px;overflow:hidden}
+  .mock-bar span{display:block;height:100%;background:var(--primary)}
+  .mock-chip-row{display:flex;gap:6px;flex-wrap:wrap;margin:2px 0}
+  .mock-row{display:flex;gap:10px;align-items:center;padding:10px 12px;background:var(--surface-container);border-radius:10px}
+  .mock-row .sq{width:28px;height:28px;border-radius:6px;background:var(--primary-fixed);flex-shrink:0}
+  .mock-lines{flex:1;display:flex;flex-direction:column;gap:4px}
+  .mock-line{height:6px;background:var(--surface-high);border-radius:3px}
+  .mock-line.s{width:60%}
+  .mock-line.m{width:80%}
+
+  .mock-dashboard{position:absolute;inset:0;background:var(--surface);padding:16px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;grid-template-rows:auto 1fr auto}
+  .mock-dashboard .stat{background:var(--surface-container);border-radius:10px;padding:10px}
+  .mock-dashboard .stat strong{font:700 18px 'Manrope',sans-serif;color:var(--primary);display:block;margin-bottom:2px}
+  .mock-dashboard .stat span{font:500 9px 'JetBrains Mono',monospace;letter-spacing:0.08em;text-transform:uppercase;color:var(--secondary)}
+  .mock-dashboard .wide{grid-column:1/-1;background:var(--surface-container);border-radius:10px;padding:12px;display:flex;align-items:end;gap:4px;height:110px}
+  .mock-dashboard .wide i{background:var(--primary);width:14px;border-radius:2px;display:block}
+
+  .mock-report{position:absolute;inset:0;background:var(--surface-container);padding:16px;display:flex;flex-direction:column;gap:10px;align-items:stretch;justify-content:flex-start}
+  .mock-report .big{background:var(--surface);border-radius:12px;padding:14px;flex:1;display:flex;flex-direction:column;gap:8px}
+
+  /* ── platform strategy ─────────────────────────────── */
+  .strategy-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px}
+  .pillar{background:var(--surface-lowest);border-radius:18px;padding:30px;position:relative;overflow:hidden;min-height:360px;display:flex;flex-direction:column}
+  .pillar::after{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:var(--secondary)}
+  .pillar.a::after{background:var(--primary)}
+  .pillar.b::after{background:var(--secondary)}
+  .pillar.c::after{background:var(--amber)}
+  .pillar-num{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--secondary);letter-spacing:0.14em;margin-bottom:10px}
+  .pillar h3{font-size:22px;letter-spacing:-0.015em;margin-bottom:12px}
+  .pillar > p{font-size:14px;color:var(--on-surface-variant);margin-bottom:18px;text-wrap:pretty}
+  .pillar ul{list-style:none;display:flex;flex-direction:column;gap:10px;margin-top:auto}
+  .pillar li{font-size:13px;display:grid;grid-template-columns:16px 1fr;gap:10px;line-height:1.45}
+  .pillar li::before{content:'';width:6px;height:6px;background:var(--primary);border-radius:50%;margin-top:8px}
+  .pillar li b{font-family:'Manrope',sans-serif;color:var(--primary);font-weight:600}
+
+  /* ── Loops diagram ─────────────────────────────────── */
+  .loops{background:var(--surface-container);border-radius:20px;padding:44px;display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center}
+  .loops-visual{position:relative;height:380px}
+  .loop-node{position:absolute;background:var(--surface-lowest);border-radius:14px;padding:14px 16px;box-shadow:0 6px 16px rgba(29,28,20,0.07);min-width:150px}
+  .loop-node .eyebrow{margin-bottom:4px;display:block;font-size:9px}
+  .loop-node strong{font:600 13px 'Manrope',sans-serif;color:var(--primary);display:block;line-height:1.2}
+  .loop-node .metric{font:700 11px 'JetBrains Mono',monospace;color:var(--secondary);margin-top:6px;display:block}
+  .loop-node.n1{top:0;left:0}
+  .loop-node.n2{top:20px;right:0;background:var(--primary);color:#fff}
+  .loop-node.n2 strong{color:#fff}
+  .loop-node.n2 .eyebrow,.loop-node.n2 .metric{color:var(--secondary-container)}
+  .loop-node.n3{bottom:20px;right:20%}
+  .loop-node.n4{bottom:0;left:0;background:var(--secondary-container)}
+  .loop-svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+  .loops h3{font-size:30px;letter-spacing:-0.025em;margin-bottom:14px}
+  .loops p{color:var(--on-surface-variant);margin-bottom:20px;text-wrap:pretty}
+  .loops .callout{background:var(--surface);border-left:4px solid var(--secondary);padding:14px 18px;border-radius:0 10px 10px 0;font-size:13px;color:var(--primary)}
+  .loops .callout b{font-family:'Manrope',sans-serif}
+
+  /* ── Localities map/promote ────────────────────────── */
+  .promote{display:grid;grid-template-columns:1.1fr 1fr;gap:32px;align-items:stretch}
+  .promote-map{background:var(--primary);border-radius:20px;padding:36px;color:#fff;position:relative;overflow:hidden;min-height:460px}
+  .promote-map::before{content:'';position:absolute;inset:0;background:
+    radial-gradient(circle at 30% 40%, rgba(255,255,255,0.08) 0, transparent 50%),
+    repeating-linear-gradient(38deg,transparent 0 28px,rgba(255,255,255,0.03) 28px 29px);
+  }
+  .promote-map h3{color:#fff;font-size:28px;letter-spacing:-0.02em;margin-bottom:10px;position:relative}
+  .promote-map p{color:rgba(255,255,255,0.72);margin-bottom:28px;position:relative;max-width:42ch}
+  .promote-map .eyebrow{color:var(--secondary-container);margin-bottom:10px;display:block}
+  .ro-map{position:relative;height:240px;margin-top:10px}
+  .ro-map svg{width:100%;height:100%}
+  .ro-map .pin{position:absolute;display:flex;flex-direction:column;align-items:center;gap:2px;transform:translate(-50%,-100%)}
+  .ro-map .pin-dot{width:14px;height:14px;border-radius:50%;background:var(--secondary-container);box-shadow:0 0 0 4px rgba(253,195,154,0.3)}
+  .ro-map .pin-label{font:600 10px 'JetBrains Mono',monospace;letter-spacing:0.06em;color:#fff;background:rgba(0,0,0,0.4);padding:2px 6px;border-radius:4px;white-space:nowrap}
+  .ro-map .pin.hi .pin-dot{background:#f4c361;box-shadow:0 0 0 4px rgba(244,195,97,0.3),0 0 18px rgba(244,195,97,0.4)}
+
+  .promote-list{display:flex;flex-direction:column;gap:12px}
+  .promote-item{background:var(--surface-lowest);border-radius:14px;padding:18px 20px;display:grid;grid-template-columns:auto 1fr auto;gap:18px;align-items:center;box-shadow:0 6px 14px rgba(29,28,20,0.04)}
+  .promote-score{width:48px;height:48px;border-radius:12px;background:var(--primary-fixed);display:flex;align-items:center;justify-content:center;font:700 18px 'Manrope',sans-serif;color:var(--primary)}
+  .promote-score.b{background:var(--secondary-container);color:var(--tertiary)}
+  .promote-score.c{background:#f4e0d6;color:#8a4a2a}
+  .promote-name{font:700 15px 'Manrope',sans-serif;color:var(--primary);letter-spacing:-0.01em}
+  .promote-sub{font:400 12px 'Public Sans',sans-serif;color:var(--on-surface-variant);margin-top:2px}
+  .promote-status{font:600 10px 'JetBrains Mono',monospace;letter-spacing:0.12em;text-transform:uppercase;padding:5px 10px;border-radius:999px;background:var(--primary-fixed);color:var(--primary)}
+  .promote-status.pending{background:var(--surface-container);color:var(--secondary)}
+
+  /* ── Roadmap ───────────────────────────────────────── */
+  .roadmap{background:var(--surface-lowest);border-radius:20px;padding:36px;box-shadow:0 10px 28px rgba(29,28,20,0.05)}
+  .roadmap-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:28px;padding-bottom:18px;border-bottom:0}
+  .roadmap-header::after{content:'';display:block;height:1px;background:var(--surface-container);width:100%}
+  .roadmap-timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--surface-container);border-radius:14px;overflow:hidden}
+  .r-col{background:var(--surface-lowest);padding:22px;display:flex;flex-direction:column;gap:14px;min-height:380px}
+  .r-col-head{display:flex;justify-content:space-between;align-items:center;padding-bottom:14px;border-bottom:1px dashed var(--surface-high)}
+  .r-col-title{font:700 14px 'Manrope',sans-serif;color:var(--primary)}
+  .r-col-time{font:500 10px 'JetBrains Mono',monospace;letter-spacing:0.1em;color:var(--secondary)}
+  .r-item{font-size:13px;line-height:1.45;padding:12px 14px;background:var(--surface-low);border-radius:10px}
+  .r-item b{font:600 12px 'Manrope',sans-serif;color:var(--primary);display:block;margin-bottom:4px}
+  .r-item .tag{font:600 9px 'JetBrains Mono',monospace;letter-spacing:0.1em;text-transform:uppercase;color:var(--secondary);margin-top:6px;display:inline-block;padding:2px 6px;background:var(--surface-lowest);border-radius:4px}
+  .r-item.flag{background:var(--primary-fixed)}
+  .r-item.flag b{color:var(--primary)}
+  .r-item.warn{background:#f4e0d6}
+
+  /* ── Key metrics ───────────────────────────────────── */
+  .metrics-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:0;background:var(--primary);border-radius:20px;overflow:hidden;margin-top:40px}
+  .metric{padding:34px 32px;color:#fff;position:relative}
+  .metric + .metric{border-left:1px solid rgba(255,255,255,0.1)}
+  .metric .mono{font-size:10px;letter-spacing:0.16em;color:var(--secondary-container);text-transform:uppercase;display:block;margin-bottom:14px}
+  .metric strong{font:800 40px 'Manrope',sans-serif;letter-spacing:-0.03em;display:block;line-height:1;color:#fff}
+  .metric strong sup{font-size:18px;font-weight:600;color:var(--secondary-container);margin-left:4px;top:-0.5em;position:relative}
+  .metric p{font-size:12px;color:rgba(255,255,255,0.72);margin-top:8px;line-height:1.4}
+
+  /* ── Footer ────────────────────────────────────────── */
+  footer{margin-top:80px;padding-top:30px;border-top:1px dashed var(--outline);display:flex;justify-content:space-between;align-items:center;color:var(--on-surface-variant);font-size:12px;font-family:'JetBrains Mono',monospace}
+  footer .dot{display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--secondary);margin:0 10px;vertical-align:middle}
+
+  /* hide mobile */
+  @media (max-width:900px){
+    .wrap{padding:24px}
+    .hero{grid-template-columns:1fr;gap:32px}
+    .hero h1{font-size:48px}
+    .swot,.audit-grid,.strategy-grid,.promote,.roadmap-timeline,.metrics-strip{grid-template-columns:1fr}
+    .loops{grid-template-columns:1fr}
+    .loops-visual{height:280px}
+    .tabs{display:none}
+  }
+
+  /* Tabs sections */
+  .view{display:none}
+  .view.active{display:block;animation:fade .4s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ── TOPBAR ───────────────────────────────────────── -->
+  <div class="topbar">
+    <div class="brand">
+      <svg width="38" height="40" viewBox="0 0 180 186" xmlns="http://www.w3.org/2000/svg" aria-label="BearSmart">
+        <path d="M90 0 L175 32 L175 102 Q175 158 90 186 Q5 158 5 102 L5 32 Z" fill="none" stroke="#17341d" stroke-width="3.5" stroke-linejoin="round"/>
+        <path d="M90 14 L163 42 L163 98 Q163 148 90 172 Q17 148 17 98 L17 42 Z" fill="#17341d" opacity="0.06"/>
+        <ellipse cx="90" cy="120" rx="30" ry="24" fill="#17341d"/>
+        <ellipse cx="55" cy="82" rx="15" ry="18" fill="#17341d" transform="rotate(-15 55 82)"/>
+        <ellipse cx="80" cy="66" rx="13" ry="16" fill="#17341d" transform="rotate(-5 80 66)"/>
+        <ellipse cx="106" cy="66" rx="13" ry="16" fill="#17341d" transform="rotate(5 106 66)"/>
+        <ellipse cx="130" cy="82" rx="15" ry="18" fill="#17341d" transform="rotate(15 130 82)"/>
+      </svg>
+      <div>
+        <div class="brand-title">BearSmart Romania</div>
+        <div class="brand-sub">Strategic Dossier · v1</div>
+      </div>
+    </div>
+    <div class="tabs" role="tablist">
+      <button class="tab active" data-view="swot">SWOT</button>
+      <button class="tab" data-view="audit">UX Audit</button>
+      <button class="tab" data-view="strategy">Platform Strategy</button>
+      <button class="tab" data-view="promote">Promote Localities</button>
+      <button class="tab" data-view="roadmap">Roadmap</button>
+    </div>
+    <div class="meta-right">
+      <span class="meta-dot"></span>
+      <span>Prepared 20 APR 2026</span>
+    </div>
+  </div>
+
+  <!-- ── HERO ─────────────────────────────────────────── -->
+  <section class="hero">
+    <div>
+      <span class="eyebrow">Internal Strategy · Product & Platform Review</span>
+      <h1>A field guide<br>for turning a pilot<br>into <em>national infrastructure.</em></h1>
+      <p class="lede">This dossier analyses the BearSmart Romania webapp in its current MVP form, defines its <strong>strategic position</strong>, and lays out a concrete plan to grow it into a platform with <strong>high public appeal</strong>, <strong>intuitive UX</strong>, and a mandate to <strong>promote BearSmart localities</strong> as destinations — not just data points.</p>
+    </div>
+    <dl class="hero-meta">
+      <dt>Product</dt><dd>BearSmart Romania (multi-tenant civic platform)</dd>
+      <dt>Current Stage</dt><dd>MVP · internal alpha, 3–5 pilot towns</dd>
+      <dt>Core Loop</dt><dd>Town page → alert → action → report → progress</dd>
+      <dt>North Star</dt><dd>Repeat-use + verified certification, not pageviews</dd>
+    </dl>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- VIEW 1: SWOT                                         -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <div class="view active" data-view="swot">
+
+  <section class="section">
+    <div class="section-head">
+      <div>
+        <span class="num">01 / Analysis</span>
+        <h2>SWOT — where we stand today</h2>
+      </div>
+      <p>Compiled against the current MVP: the five HTML surfaces (map, localities, dashboard, ops, report), the PRD, and the certification roadmap. Each point is an observation grounded in what ships today.</p>
+    </div>
+
+    <div class="swot">
+      <div class="swot-compass">
+        <span class="mono">BearSmart</span>
+        <strong>RO</strong>
+      </div>
+
+      <div class="quad s">
+        <div class="quad-label"><span class="quad-letter">S</span><div><span class="kicker">Advantages</span><h3>Strengths</h3></div></div>
+        <ul>
+          <li><span class="mono">S1</span><div><b>Town-as-entity architecture.</b><span>Towns are first-class objects with certification lifecycle, not content pages. This is a genuine moat vs. static bear-safety sites.</span></div></li>
+          <li><span class="mono">S2</span><div><b>Operational & civic breadth.</b><span>Reports, alerts, preparedness plans, municipal certification and reviewer workflow already scoped in one product.</span></div></li>
+          <li><span class="mono">S3</span><div><b>Mature design language.</b><span>“Rugged Editorial” system (Manrope + Public Sans, earth palette, no 1px lines) gives the product a premium, trustable voice that most civic tools lack.</span></div></li>
+          <li><span class="mono">S4</span><div><b>Geographic fit.</b><span>Romania holds ~60% of Europe's brown bear population — a single-country scope with national-infrastructure ambition is defensible and fundable.</span></div></li>
+        </ul>
+      </div>
+
+      <div class="quad w">
+        <div class="quad-label"><span class="quad-letter">W</span><div><span class="kicker">Gaps today</span><h3>Weaknesses</h3></div></div>
+        <ul>
+          <li><span class="mono">W1</span><div><b>Dense, demo-flavoured home screen.</b><span>Index.html stacks 9+ panels (Spotlight, Localities, Contacts, Plan, Report, Alerts, Published Reports, Admin, Ops) in one column — everything is one tap away, nothing is one decision away.</span></div></li>
+          <li><span class="mono">W2</span><div><b>Role switcher in the masthead.</b><span>Exposing <span class="mono">Public / Resident / Town Admin / Moderator / Reviewer</span> to every visitor reads as a demo, not a product. Confuses trust signals.</span></div></li>
+          <li><span class="mono">W3</span><div><b>Localities feel like a spreadsheet.</b><span>The directory is a filterable grid — no emotional draw, no “visit this place,” no imagery, no pride-of-place narrative.</span></div></li>
+          <li><span class="mono">W4</span><div><b>No first-run orientation.</b><span>A tourist landing cold is shown a map, a role dropdown, and a sheet of tabs. No “What should I do this weekend?” (User Story #36) entry point.</span></div></li>
+          <li><span class="mono">W5</span><div><b>Emergency path unclear.</b><span>"Report" and "Emergency 112" are button-siblings in the header. PRD mandates clear separation; today they compete.</span></div></li>
+        </ul>
+      </div>
+
+      <div class="quad o">
+        <div class="quad-label"><span class="quad-letter">O</span><div><span class="kicker">Openings</span><h3>Opportunities</h3></div></div>
+        <ul>
+          <li><span class="mono">O1</span><div><b>Become the <i>Romania travel lens</i> for mountain country.</b><span>No product today sits between Google Maps and a tourism board with real-time safety + town certification. Own that gap.</span></div></li>
+          <li><span class="mono">O2</span><div><b>Certification as civic prestige.</b><span>Public scorecards, renewal badges, and town-vs-town progress turn compliance into reputation currency for mayors.</span></div></li>
+          <li><span class="mono">O3</span><div><b>Tourist subscriptions as a growth loop.</b><span>Trip-scoped, auto-expiring alert subscriptions (PRD US #7) are lightweight acquisition for seasonal visitors — the most common first-touch audience.</span></div></li>
+          <li><span class="mono">O4</span><div><b>EU funding & ESG narrative.</b><span>Human–wildlife coexistence is a fundable cross-border story. A pilot with published metrics is the artefact grant reviewers want.</span></div></li>
+          <li><span class="mono">O5</span><div><b>Partnerships with beekeepers, apiaries, guesthouses.</b><span>Bear-safe business badge is an under-exploited B2B flywheel — each badge is both a compliance win and a marketing asset the business distributes for free.</span></div></li>
+        </ul>
+      </div>
+
+      <div class="quad t">
+        <div class="quad-label"><span class="quad-letter">T</span><div><span class="kicker">Risks</span><h3>Threats</h3></div></div>
+        <ul>
+          <li><span class="mono">T1</span><div><b>Misinformation via unmoderated reports.</b><span>A single viral false-location sighting could undermine trust or create crowds. Moderation latency is the single biggest reputational risk.</span></div></li>
+          <li><span class="mono">T2</span><div><b>Low town-admin engagement.</b><span>If pilot mayors don't post alerts weekly, town pages go stale and the retention loop dies. Admin onboarding is an existential concern, not a polish item.</span></div></li>
+          <li><span class="mono">T3</span><div><b>Official agency territorialism.</b><span>National wildlife and emergency services may see the platform as duplicative. Mitigation: read-only, source-of-record framing; never claim dispatch role.</span></div></li>
+          <li><span class="mono">T4</span><div><b>Seasonality collapse.</b><span>Bear activity is seasonal; usage may trough in winter. Without preparedness + off-season education loops the app feels dead 5 months a year.</span></div></li>
+          <li><span class="mono">T5</span><div><b>Privacy exposure of rural residents.</b><span>Precise sighting pins near isolated homes could identify households. Geo-fuzzing rules must ship before public launch, not after an incident.</span></div></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- KPI band -->
+  <div class="metrics-strip">
+    <div class="metric">
+      <span class="mono">North-star</span>
+      <strong>28-day<sup>↺</sup></strong>
+      <p>Returning active users; beats pageviews as the primary KPI.</p>
+    </div>
+    <div class="metric">
+      <span class="mono">Trust proxy</span>
+      <strong>&lt; 6h<sup>SLA</sup></strong>
+      <p>Median moderation turn-around for submitted reports in season.</p>
+    </div>
+    <div class="metric">
+      <span class="mono">Civic health</span>
+      <strong>≥ 1<sup>/wk</sup></strong>
+      <p>Active alert or content post per pilot town during active season.</p>
+    </div>
+    <div class="metric">
+      <span class="mono">Behaviour change</span>
+      <strong>45<sup>%</sup></strong>
+      <p>Target completion rate on the first preparedness checklist.</p>
+    </div>
+  </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- VIEW 2: UX AUDIT                                     -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <div class="view" data-view="audit">
+  <section class="section" style="margin-top:48px">
+    <div class="section-head">
+      <div>
+        <span class="num">02 / Heuristic Audit</span>
+        <h2>What the current screens<br>teach us to fix</h2>
+      </div>
+      <p>Each card replays a screen from the live MVP, marks the friction in place, and proposes the specific design move that unlocks repeat use.</p>
+    </div>
+
+    <div class="audit-grid">
+
+      <!-- Card 1 · Map -->
+      <div class="screen-card">
+        <div class="screen-mock">
+          <span class="screen-tag">index.html · Map</span>
+          <div class="mock-map"></div>
+          <div class="mock-search">Search towns, reports, and local alerts…</div>
+          <div class="mock-cluster">12</div>
+          <div class="mock-dot d1"></div>
+          <div class="mock-dot d2"></div>
+          <div class="mock-dot d3"></div>
+          <div class="mock-chips">
+            <span class="mock-chip on">Current town</span>
+            <span class="mock-chip">All zones</span>
+            <span class="mock-chip on">All reports</span>
+            <span class="mock-chip">Sightings</span>
+            <span class="mock-chip">Attractants</span>
+          </div>
+          <div class="ann" style="top:44px;right:14px"><b>Issue</b>Role picker in the masthead looks like a demo toggle</div>
+          <div class="ann plus" style="bottom:60px;left:14px"><b>Keep</b>Map-first IA is correct for a field product</div>
+        </div>
+        <div class="screen-body">
+          <span class="eyebrow">Home · Public map</span>
+          <h4>Strong bones, wrong defaults</h4>
+          <div class="issue-row"><span class="issue-badge high">High</span><p class="issue-text"><b>Collapse the 9-panel right sheet</b> into three mobile tabs (Now · Plan · Report) with a progressive sheet — the current stack shows everything simultaneously and trains users to scroll, not act.</p></div>
+          <div class="issue-row"><span class="issue-badge med">Med</span><p class="issue-text"><b>Move role switching out of the public chrome.</b> Residents sign in; admins enter through a signed-in workspace URL — not a &lt;select&gt; next to the logo.</p></div>
+          <div class="issue-row"><span class="issue-badge low">Low</span><p class="issue-text"><b>Promote the legend + safety overlay</b> from a banner to a persistent glass rail so first-time users understand what the dots mean.</p></div>
+        </div>
+      </div>
+
+      <!-- Card 2 · Localities -->
+      <div class="screen-card">
+        <div class="screen-mock">
+          <span class="screen-tag">localities.html · Directory</span>
+          <div class="mock-panel">
+            <h5>Certified Localities · 12</h5>
+            <div class="mock-chip-row">
+              <span class="mock-chip on">Safety Score</span>
+              <span class="mock-chip">Region</span>
+              <span class="mock-chip">County</span>
+            </div>
+            <div class="mock-row"><div class="sq"></div><div class="mock-lines"><div class="mock-line m"></div><div class="mock-line s"></div></div></div>
+            <div class="mock-row"><div class="sq"></div><div class="mock-lines"><div class="mock-line m"></div><div class="mock-line s"></div></div></div>
+            <div class="mock-row"><div class="sq"></div><div class="mock-lines"><div class="mock-line m"></div><div class="mock-line s"></div></div></div>
+            <div class="mock-row"><div class="sq"></div><div class="mock-lines"><div class="mock-line m"></div><div class="mock-line s"></div></div></div>
+          </div>
+          <div class="ann" style="top:100px;right:14px"><b>Issue</b>Reads as a CSV, not a destination guide</div>
+          <div class="ann" style="bottom:14px;left:14px"><b>Missing</b>No imagery, no "why visit", no story</div>
+        </div>
+        <div class="screen-body">
+          <span class="eyebrow">Localities · Promotion</span>
+          <h4>Turn the directory into a field guide</h4>
+          <div class="issue-row"><span class="issue-badge high">High</span><p class="issue-text"><b>Hero-card each locality</b> with photography, a one-line pitch ("High Carpathians · Pop 4,200 · Certified since 2024"), seasonal trail state, and a resident/admin quote.</p></div>
+          <div class="issue-row"><span class="issue-badge med">Med</span><p class="issue-text"><b>Add a national map view</b> with pride-of-place pins — counties light up as participating — so locality browsing feels like national progress, not a table.</p></div>
+          <div class="issue-row"><span class="issue-badge med">Med</span><p class="issue-text"><b>Every locality needs a "Plan a visit this weekend" CTA</b> (US #36) that spins up a trip-scoped alert subscription in one tap.</p></div>
+        </div>
+      </div>
+
+      <!-- Card 3 · Dashboard -->
+      <div class="screen-card">
+        <div class="screen-mock">
+          <span class="screen-tag">dashboard.html · Town Admin</span>
+          <div class="mock-dashboard">
+            <div class="stat"><span>Reports 30d</span><strong>47</strong></div>
+            <div class="stat"><span>Alerts live</span><strong>2</strong></div>
+            <div class="stat"><span>Cert score</span><strong>78%</strong></div>
+            <div class="wide">
+              <i style="height:20%"></i><i style="height:35%"></i><i style="height:50%"></i><i style="height:40%"></i>
+              <i style="height:72%"></i><i style="height:90%"></i><i style="height:65%"></i><i style="height:55%"></i>
+              <i style="height:80%"></i><i style="height:60%"></i><i style="height:45%"></i><i style="height:30%"></i>
+            </div>
+            <div class="stat"><span>Households</span><strong>1,204</strong></div>
+            <div class="stat"><span>Businesses</span><strong>38</strong></div>
+            <div class="stat"><span>Unread mod.</span><strong>6</strong></div>
+          </div>
+          <div class="ann plus" style="top:14px;right:14px"><b>Keep</b>Metric density is appropriate for admin</div>
+          <div class="ann" style="bottom:70px;left:14px"><b>Issue</b>No one-click "publish alert"</div>
+        </div>
+        <div class="screen-body">
+          <span class="eyebrow">Admin · Town Hall workspace</span>
+          <h4>Publish first, analyse second</h4>
+          <div class="issue-row"><span class="issue-badge high">High</span><p class="issue-text"><b>Lead with a compose surface, not a KPI wall.</b> "Post an alert in 30s" should be the first affordance when the mayor logs in during an incident — charts live below the fold.</p></div>
+          <div class="issue-row"><span class="issue-badge med">Med</span><p class="issue-text"><b>Add weekly nudges</b> ("3 new reports need a public comment," "cert renewal in 42 days") — admin retention is the single hardest metric to move.</p></div>
+          <div class="issue-row"><span class="issue-badge low">Low</span><p class="issue-text"><b>Surface peer benchmarks</b> — show how a town's engagement compares to its certified cohort. Competition motivates town halls.</p></div>
+        </div>
+      </div>
+
+      <!-- Card 4 · Report -->
+      <div class="screen-card">
+        <div class="screen-mock">
+          <span class="screen-tag">report.html · Citizen Flow</span>
+          <div class="mock-report">
+            <div class="big">
+              <div class="mock-chip-row">
+                <span class="mock-chip on">Bear</span>
+                <span class="mock-chip">Attractant</span>
+                <span class="mock-chip">Road</span>
+                <span class="mock-chip">Livestock</span>
+                <span class="mock-chip">Apiary</span>
+              </div>
+              <div class="mock-line m"></div>
+              <div class="mock-line s"></div>
+              <div class="mock-line m"></div>
+              <div style="margin-top:auto;display:flex;gap:8px"><span class="mock-chip on">Submit</span><span class="mock-chip">Cancel</span></div>
+            </div>
+          </div>
+          <div class="ann" style="top:14px;right:14px"><b>Issue</b>Emergency 112 not differentiated enough</div>
+          <div class="ann plus" style="bottom:14px;left:14px"><b>Keep</b>Typed-report taxonomy matches PRD</div>
+        </div>
+        <div class="screen-body">
+          <span class="eyebrow">Citizen · Report sighting</span>
+          <h4>Make the emergency fork unmissable</h4>
+          <div class="issue-row"><span class="issue-badge high">High</span><p class="issue-text"><b>Top of every report flow:</b> a red "Is anyone hurt or in immediate danger?" gate that routes to 112 before the form loads. No exceptions.</p></div>
+          <div class="issue-row"><span class="issue-badge med">Med</span><p class="issue-text"><b>Auto-geo-fuzz on submit</b> with a visual "your pin is shown to the public as a ~500m ring" preview — build privacy trust into the form itself.</p></div>
+          <div class="issue-row"><span class="issue-badge low">Low</span><p class="issue-text"><b>Add status pings</b> — "Your report is being reviewed · community-confirmed · officially verified" states turn a one-shot form into a 3-visit loop.</p></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- VIEW 3: PLATFORM STRATEGY                            -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <div class="view" data-view="strategy">
+  <section class="section" style="margin-top:48px">
+    <div class="section-head">
+      <div>
+        <span class="num">03 / Platform Appeal</span>
+        <h2>Three pillars for mass appeal<br>without losing depth</h2>
+      </div>
+      <p>The platform thesis: BearSmart wins when a tourist, a mayor, and a beekeeper all want to open it weekly — for different reasons but the same trust.</p>
+    </div>
+
+    <div class="strategy-grid">
+
+      <div class="pillar a">
+        <span class="pillar-num">Pillar 01</span>
+        <h3>Become the Carpathian<br>trust layer</h3>
+        <p>Position the platform not as a bear site, but as the definitive real-time civic safety layer for Romanian mountain country — bears today, floods and road hazards tomorrow.</p>
+        <ul>
+          <li><b>Single-source claim.</b> Alerts authored by certified town halls carry an official mark and sync to Google, search snippets, hotel concierges.</li>
+          <li><b>Emergency parity.</b> Clear, designed-in separation between informational reporting and 112 escalation on every surface.</li>
+          <li><b>Verified, graded truth.</b> Every public fact tagged <i>unverified / community-confirmed / officially verified</i>.</li>
+        </ul>
+      </div>
+
+      <div class="pillar b">
+        <span class="pillar-num">Pillar 02</span>
+        <h3>Make every locality<br>feel like a destination</h3>
+        <p>Treat each certified town as a brand we co-promote. The BearSmart badge should be something a guesthouse wants on its front window, and a mayor wants on the town-hall website.</p>
+        <ul>
+          <li><b>Town-as-product page.</b> Hero photography, a one-line pitch, seasonal mood, resident voice, business badges, live alert strip.</li>
+          <li><b>Tourist trip mode.</b> "I'm visiting next weekend" generates a temporary subscription, a prep plan, and an offline-ready pocket guide.</li>
+          <li><b>Public scorecards.</b> Civic pride metrics — households bear-proofed, businesses certified, incident trend — published per town, updated quarterly.</li>
+        </ul>
+      </div>
+
+      <div class="pillar c">
+        <span class="pillar-num">Pillar 03</span>
+        <h3>Design for return,<br>not for download</h3>
+        <p>The current MVP has excellent first-visit coverage but weak return-day-7 hooks. The next six months are about building reasons to reopen.</p>
+        <ul>
+          <li><b>Seasonal loops.</b> Spring emergence, berry season, autumn hyperphagia — auto-scheduled national campaigns with per-town copy.</li>
+          <li><b>Preparedness streaks.</b> Checklists that persist across seasons; a household profile that graduates from "new" → "prepared" → "mentor."</li>
+          <li><b>Neighbour verification.</b> Reports earn a "3 neighbours confirm" badge — social proof turns a one-way form into a local conversation.</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Retention loop -->
+  <section class="section">
+    <div class="loops">
+      <div class="loops-visual">
+        <svg class="loop-svg" viewBox="0 0 500 380" preserveAspectRatio="none">
+          <defs>
+            <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+              <path d="M0,0 L10,5 L0,10 z" fill="#805533"/>
+            </marker>
+          </defs>
+          <path d="M165 40 Q 310 20 395 70" fill="none" stroke="#805533" stroke-width="1.5" stroke-dasharray="4 4" marker-end="url(#arr)"/>
+          <path d="M430 130 Q 420 220 310 290" fill="none" stroke="#805533" stroke-width="1.5" stroke-dasharray="4 4" marker-end="url(#arr)"/>
+          <path d="M230 330 Q 130 320 85 270" fill="none" stroke="#805533" stroke-width="1.5" stroke-dasharray="4 4" marker-end="url(#arr)"/>
+          <path d="M85 230 Q 100 150 155 80" fill="none" stroke="#805533" stroke-width="1.5" stroke-dasharray="4 4" marker-end="url(#arr)"/>
+        </svg>
+        <div class="loop-node n1">
+          <span class="eyebrow">01</span>
+          <strong>Town publishes alert</strong>
+          <span class="metric">avg: 2 min</span>
+        </div>
+        <div class="loop-node n2">
+          <span class="eyebrow">02</span>
+          <strong>Subscribers pinged</strong>
+          <span class="metric">open rate target: 38%</span>
+        </div>
+        <div class="loop-node n3">
+          <span class="eyebrow">03</span>
+          <strong>User takes action</strong>
+          <span class="metric">checklist · report · share</span>
+        </div>
+        <div class="loop-node n4">
+          <span class="eyebrow">04</span>
+          <strong>Progress visible on town page</strong>
+          <span class="metric">civic feedback loop</span>
+        </div>
+      </div>
+      <div>
+        <span class="kicker">The Core Loop</span>
+        <h3>Alert → Act → See progress → Come back</h3>
+        <p>The PRD already identifies this as the central product motion. The redesign makes each step a single-tap surface with clear feedback — today most steps still require 2–3 taps and the progress feedback is missing entirely.</p>
+        <div class="callout"><b>Instrumentation rule:</b> every step in this loop emits a named event. If we can't answer "did 100 residents who opened an alert complete one checklist item this week," the loop is not shipped.</div>
+      </div>
+    </div>
+  </section>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- VIEW 4: PROMOTE LOCALITIES                           -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <div class="view" data-view="promote">
+  <section class="section" style="margin-top:48px">
+    <div class="section-head">
+      <div>
+        <span class="num">04 / Promoting BearSmart Localities</span>
+        <h2>A national map of pride,<br>not a filterable list</h2>
+      </div>
+      <p>Certification becomes attractive when it is publicly visible, regionally competitive, and co-promoted by the platform. Here is what that looks like — pilot cohort shown.</p>
+    </div>
+
+    <div class="promote">
+      <div class="promote-map">
+        <span class="eyebrow">National directory</span>
+        <h3>12 pilot localities across the Carpathians</h3>
+        <p>Each pin shows live alert count, certification state, and trip-readiness. Tap reveals a destination page, not a data sheet.</p>
+        <div class="ro-map">
+          <svg viewBox="0 0 400 240" fill="none">
+            <path d="M40 120 Q 60 60 140 40 Q 220 30 300 60 Q 360 90 370 140 Q 360 190 280 210 Q 180 220 100 200 Q 40 180 40 120 Z"
+                  fill="rgba(253,195,154,0.12)" stroke="rgba(253,195,154,0.5)" stroke-width="1.5" stroke-dasharray="3 4"/>
+            <!-- Carpathian spine -->
+            <path d="M120 70 Q 170 100 200 130 Q 230 160 260 180" stroke="rgba(253,195,154,0.3)" stroke-width="14" stroke-linecap="round"/>
+          </svg>
+          <div class="pin hi" style="left:35%;top:45%"><span class="pin-dot"></span><span class="pin-label">Zărnești</span></div>
+          <div class="pin" style="left:50%;top:55%"><span class="pin-dot"></span><span class="pin-label">Bușteni</span></div>
+          <div class="pin hi" style="left:46%;top:38%"><span class="pin-dot"></span><span class="pin-label">Brașov</span></div>
+          <div class="pin" style="left:28%;top:60%"><span class="pin-dot"></span><span class="pin-label">Băile Tușnad</span></div>
+          <div class="pin" style="left:60%;top:72%"><span class="pin-dot"></span><span class="pin-label">Azuga</span></div>
+          <div class="pin" style="left:40%;top:70%"><span class="pin-dot"></span><span class="pin-label">Predeal</span></div>
+        </div>
+      </div>
+      <div class="promote-list">
+        <div class="promote-item">
+          <div class="promote-score">A+</div>
+          <div>
+            <div class="promote-name">Zărnești</div>
+            <div class="promote-sub">Brașov County · Pop 22,450 · Gateway to Piatra Craiului</div>
+          </div>
+          <span class="promote-status">Certified · 2024</span>
+        </div>
+        <div class="promote-item">
+          <div class="promote-score">A</div>
+          <div>
+            <div class="promote-name">Brașov</div>
+            <div class="promote-sub">Brașov County · Pop 237,600 · Urban–wildland interface</div>
+          </div>
+          <span class="promote-status">Certified · 2023</span>
+        </div>
+        <div class="promote-item">
+          <div class="promote-score b">B+</div>
+          <div>
+            <div class="promote-name">Băile Tușnad</div>
+            <div class="promote-sub">Harghita County · Pop 1,640 · Mineral-spa resort</div>
+          </div>
+          <span class="promote-status">Certified · 2025</span>
+        </div>
+        <div class="promote-item">
+          <div class="promote-score b">B</div>
+          <div>
+            <div class="promote-name">Bușteni</div>
+            <div class="promote-sub">Prahova County · Pop 9,000 · Bucegi access town</div>
+          </div>
+          <span class="promote-status pending">Renewal due · Q3</span>
+        </div>
+        <div class="promote-item">
+          <div class="promote-score c">C+</div>
+          <div>
+            <div class="promote-name">Predeal</div>
+            <div class="promote-sub">Brașov County · Pop 4,700 · High-altitude resort</div>
+          </div>
+          <span class="promote-status pending">In progress · 62%</span>
+        </div>
+        <div class="promote-item">
+          <div class="promote-score c">C</div>
+          <div>
+            <div class="promote-name">Azuga</div>
+            <div class="promote-sub">Prahova County · Pop 5,200 · Ski & berry country</div>
+          </div>
+          <span class="promote-status pending">In progress · 44%</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:32px;padding:28px 32px;background:var(--surface-container);border-radius:18px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:32px">
+      <div>
+        <span class="kicker">Promotion lever 01</span>
+        <h4 style="font-size:17px;margin:8px 0 6px">Embeddable town widget</h4>
+        <p style="font-size:13px;color:var(--on-surface-variant)">A small, branded "BearSmart Status" card a town can paste into its own tourism site. One line of embed code. Live alert + certification state. Drives backlinks and visibility.</p>
+      </div>
+      <div>
+        <span class="kicker">Promotion lever 02</span>
+        <h4 style="font-size:17px;margin:8px 0 6px">Seasonal press kit</h4>
+        <p style="font-size:13px;color:var(--on-surface-variant)">Quarterly auto-generated "State of BearSmart" PDFs per locality — photography, stats, mayor quotes — ready for local press and newsletters without a comms team.</p>
+      </div>
+      <div>
+        <span class="kicker">Promotion lever 03</span>
+        <h4 style="font-size:17px;margin:8px 0 6px">Bear-safe business directory</h4>
+        <p style="font-size:13px;color:var(--on-surface-variant)">Every guesthouse, restaurant, apiary that earns a badge is listed on the town page and gets a printable window sticker. Each badge is a free distribution surface.</p>
+      </div>
+    </div>
+
+  </section>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- VIEW 5: ROADMAP                                      -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <div class="view" data-view="roadmap">
+  <section class="section" style="margin-top:48px">
+    <div class="section-head">
+      <div>
+        <span class="num">05 / Execution</span>
+        <h2>90-day plan to move<br>from MVP to platform</h2>
+      </div>
+      <p>Four horizons, in order. Items flagged <span class="mono" style="color:var(--primary)">green</span> unlock a public milestone; <span class="mono" style="color:#8a2f2f">red</span> items are blockers that must ship before public launch.</p>
+    </div>
+
+    <div class="roadmap">
+      <div class="roadmap-header">
+        <h3 style="font-size:22px">From alpha to public MVP · milestones</h3>
+        <span class="mono" style="font-size:11px;color:var(--secondary)">April → July 2026</span>
+      </div>
+
+      <div class="roadmap-timeline">
+
+        <div class="r-col">
+          <div class="r-col-head"><span class="r-col-title">Weeks 1–3</span><span class="r-col-time">H1 · Fix the front door</span></div>
+          <div class="r-item warn"><b>Remove role switcher from public chrome</b>Residents & admins log in through dedicated routes.<span class="tag">Blocker</span></div>
+          <div class="r-item"><b>Emergency gate on every report flow</b>Red "in immediate danger?" fork → 112.<span class="tag">Trust</span></div>
+          <div class="r-item"><b>Collapse home sheet to 3 tabs</b>Now · Plan · Report. Progressive bottom-sheet on mobile.<span class="tag">UX</span></div>
+          <div class="r-item"><b>Ship geo-fuzz preview on submit</b>Map pin shown as ~500m ring before publish.<span class="tag">Privacy</span></div>
+        </div>
+
+        <div class="r-col">
+          <div class="r-col-head"><span class="r-col-title">Weeks 4–6</span><span class="r-col-time">H2 · Localities as destinations</span></div>
+          <div class="r-item flag"><b>Town pages v2</b>Hero photography, one-line pitch, seasonal mood, resident quote.<span class="tag">Appeal</span></div>
+          <div class="r-item"><b>National pride map</b>Pins, cert states, aggregated activity; replaces the filterable table as primary surface.<span class="tag">Appeal</span></div>
+          <div class="r-item"><b>"Plan a visit" trip mode</b>Temporary subscription + prep checklist in one tap.<span class="tag">Growth</span></div>
+          <div class="r-item"><b>Business badge directory</b>Guesthouse / apiary / restaurant listings on every town page.<span class="tag">B2B</span></div>
+        </div>
+
+        <div class="r-col">
+          <div class="r-col-head"><span class="r-col-title">Weeks 7–9</span><span class="r-col-time">H3 · Return loops</span></div>
+          <div class="r-item"><b>Admin weekly nudges</b>"3 reports need public comment," renewal countdown, peer benchmark.<span class="tag">Retention</span></div>
+          <div class="r-item"><b>Report status pings</b>Under review → community-confirmed → officially verified.<span class="tag">Loop</span></div>
+          <div class="r-item"><b>Seasonal campaign engine</b>Spring emergence + autumn hyperphagia auto-scheduled per town.<span class="tag">Loop</span></div>
+          <div class="r-item"><b>Preparedness streaks</b>Checklists persist across seasons; household profiles graduate.<span class="tag">Behaviour</span></div>
+        </div>
+
+        <div class="r-col">
+          <div class="r-col-head"><span class="r-col-title">Weeks 10–12</span><span class="r-col-time">H4 · Public launch</span></div>
+          <div class="r-item flag"><b>Public MVP release</b>3–5 certified pilots · open reporting · moderated · bilingual.<span class="tag">Milestone</span></div>
+          <div class="r-item"><b>Embeddable town widget</b>One-line copy-paste for town-hall websites.<span class="tag">Distribution</span></div>
+          <div class="r-item"><b>"State of BearSmart" PDF</b>Auto-generated quarterly press kits per locality.<span class="tag">Distribution</span></div>
+          <div class="r-item"><b>Instrumented retention dashboard</b>28-day return, alert CTR, checklist completion by town.<span class="tag">Ops</span></div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+  </div>
+
+  <!-- ── footer ───────────────────────────────────────── -->
+  <footer>
+    <span>BearSmart Romania<span class="dot"></span>Strategic Dossier<span class="dot"></span>Confidential</span>
+    <span>Design system · Rugged Editorial<span class="dot"></span>Tabs preserve position in localStorage</span>
+  </footer>
+</div>
+
+<script>
+  const tabs = document.querySelectorAll('.tab');
+  const views = document.querySelectorAll('.view');
+  function setView(name){
+    tabs.forEach(t => t.classList.toggle('active', t.dataset.view === name));
+    views.forEach(v => v.classList.toggle('active', v.dataset.view === name));
+    try { localStorage.setItem('bs_view', name); } catch(e){}
+    window.scrollTo({top: 0, behavior:'smooth'});
+  }
+  tabs.forEach(t => t.addEventListener('click', () => setView(t.dataset.view)));
+  try {
+    const saved = localStorage.getItem('bs_view');
+    if (saved) setView(saved);
+  } catch(e){}
+</script>
+</body>
+</html>

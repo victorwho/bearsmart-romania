@@ -1,0 +1,82 @@
+# BearSmart: Technical Implementation Guide
+
+## 1. Project Overview
+**BearSmart** is a map-centric web application designed to foster coexistence between humans and bears. It provides real-time sighting data, community certification tracking, and personalized safety resources.
+
+### Tech Stack Recommendation
+- **Frontend:** React or Next.js
+- **Styling:** Tailwind CSS (configured with the Wilderness Guard theme)
+- **Maps:** Mapbox GL JS or Google Maps API with custom topographic styling
+- **Icons:** Material Symbols / Lucide React
+
+---
+
+## 2. Design System: Wilderness Guard
+The visual language is "Rugged Editorial" — functional, high-trust, and outdoors-inspired.
+
+### Visual Tokens
+- **Primary Color:** `#2D4B32` (Deep Forest Green)
+- **Secondary/Accent:** `#17341d` (Darker Forest)
+- **Alert/Emergency:** `#B91C1C` (Standard Red)
+- **Surface/Background:** `#fff9ed` (Cream/Parchment)
+- **Typography:** Manrope (Clean, modern sans-serif)
+- **Border Radius:** 4px (Sharp, professional corners)
+
+---
+
+## 3. Global Components
+These components persist across most views to ensure a consistent navigation experience.
+
+### TopNavBar
+- **Brand:** "BEARSMART" (Bold, uppercase)
+- **Links:** Map, Community, Safety Guides
+- **Actions:** "Report Sighting" (Primary CTA), "Emergency" (High-priority button)
+- **User:** Profile avatar with safety status indicator.
+
+### SideNavBar (The Ranger's Guide)
+- **Contextual Navigation:** Switches between Filters, Sightings, News Feed, and Certified Zones.
+- **Footer:** Access to Settings and Support.
+
+---
+
+## 4. Screen Specifications
+
+### Screen 1: Main Interactive Map ({{DATA:SCREEN:SCREEN_2}})
+- **Objective:** Primary exploration tool for sightings and safe zones.
+- **Features:** 
+  - Full-screen topographic map.
+  - Floating search bar with urgent alert ticker.
+  - Detailed side panel for selected localities (e.g., Canmore, AB).
+  - Safety Score (0-100) and Activity Level indicators.
+  - Map Legend and Zoom controls.
+
+### Screen 2: Certified Localities ({{DATA:SCREEN:SCREEN_4}})
+- **Objective:** Directory of communities with gold/silver safety ratings.
+- **Features:** 
+  - Grid of community cards.
+  - Progress tracking for safety measures (e.g., Bear-Proof Bins, Electric Fencing).
+  - "Nominate Your Locality" CTA card.
+  - Network Impact section with data visualization (Conflict Incidents Trend).
+
+### Screen 3: Safety Dashboard ({{DATA:SCREEN:SCREEN_5}})
+- **Objective:** User-centric safety management.
+- **Features:** 
+  - Current status card (e.g., "Green / Low").
+  - Safety Checklist with seasonal reminders.
+  - "Recent Activity Near You" mini-map.
+  - Property Assessment CTA.
+
+### Screen 4: Report a Sighting ({{DATA:SCREEN:SCREEN_6}})
+- **Objective:** High-accuracy data entry flow.
+- **Features:** 
+  - 4-step progress stepper.
+  - Pin-on-map location selector with topographic overlay.
+  - Contextual "Ranger Tips" (e.g., "Maintain 100 Yards").
+  - Summary cards for Community Impact.
+
+---
+
+## 5. Development Notes
+- **Responsiveness:** Ensure the map container handles window resizing gracefully.
+- **Accessibility:** Use high-contrast colors for alerts and ensure all interactive elements have ARIA labels.
+- **Data:** Mock data should reflect realistic geographic coordinates in bear-prone regions (e.g., Bow Valley, Pacific Northwest).

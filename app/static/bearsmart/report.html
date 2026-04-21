@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BearSmart Romania | Report a Sighting</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
+  <link rel="stylesheet" href="/bearsmart-static/styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="app-header">
+      <div class="brand-row">
+        <img class="brand-logo" src="/logo/bearsmart-logo-light.svg" alt="BearSmart logo">
+        <div class="brand-text">
+          <h1 class="brand-title">Report a Sighting</h1>
+        </div>
+        <nav class="top-nav">
+          <a class="nav-link" href="/bearsmart/map">Map</a>
+          <a class="nav-link" href="/bearsmart/dashboard">Bear Safety Guides</a>
+          <a class="nav-link" href="/bearsmart/localities">BearSmart Localities</a>
+        </nav>
+      </div>
+      <div class="header-right">
+        <a class="button button-primary" href="/bearsmart/report">Report Sighting</a>
+        <a class="button button-alert" href="tel:112">Emergency</a>
+      </div>
+    </header>
+
+    <div class="page-layout no-rail">
+      <main class="page-content">
+        <section class="simple-intro">
+          <h2 class="section-title">Report a sighting in four quick steps.</h2>
+          <p class="section-copy">Drop a point, describe what you saw, and send it for moderation.</p>
+        </section>
+
+        <section class="report-card report-card-solo">
+            <div class="report-notice">
+              <strong>Safety note</strong>
+              <p class="section-copy">Never move closer for a better photo or more accurate identification.</p>
+            </div>
+            <div class="stepper">
+              <div class="step-bar active" data-step-bar="1"></div>
+              <div class="step-bar" data-step-bar="2"></div>
+              <div class="step-bar" data-step-bar="3"></div>
+              <div class="step-bar" data-step-bar="4"></div>
+              <span id="stepLabel" class="status-chip">Step 1 of 4</span>
+            </div>
+
+            <div id="step1" class="report-form-grid">
+              <div>
+                <h2 class="section-title">Where?</h2>
+                <p class="section-copy">Pin the location of the sighting or use the current / town location.</p>
+              </div>
+              <div id="reportMap" class="report-map"></div>
+              <div class="action-grid two">
+                <button id="useCurrentLocationButton" class="button button-secondary" type="button">Use My Current Location</button>
+                <button id="useTownCenterButton" class="button button-secondary" type="button">Use Town Center</button>
+              </div>
+              <div class="list-card"><strong>Selected coordinates</strong><div id="selectedCoordinates" class="section-copy">No point selected yet.</div></div>
+              <div id="fuzzPreviewNote" class="fuzz-preview-note" role="status" aria-live="polite">Privacy: your pin is published to the public as a ~500 m area so private homes are not identifiable.</div>
+            </div>
+
+            <div id="step2" class="report-form-grid hidden">
+              <div>
+                <h2 class="section-title">What?</h2>
+                <p class="section-copy">Choose the sighting type and describe what the bear was doing.</p>
+              </div>
+              <div id="selectedPointSummary" class="point-summary-card">Point summary will appear here after you place a marker.</div>
+              <div id="reportTypeGrid" class="report-type-grid"></div>
+              <div class="field-grid two">
+                <div id="fieldNumberOfBears" class="hidden"><input id="numberOfBears" type="number" min="1" max="20" placeholder="Number of bears seen"></div>
+                <div id="fieldBehaviorObserved" class="hidden"><input id="behaviorObserved" type="text" placeholder="Behavior observed"></div>
+                <div id="fieldAttractantType" class="hidden"><input id="attractantType" type="text" placeholder="Attractant type"></div>
+                <div id="fieldRoadContext" class="hidden"><input id="roadContext" type="text" placeholder="Road context"></div>
+              </div>
+            </div>
+
+            <div id="step3" class="report-form-grid hidden">
+              <div>
+                <h2 class="section-title">Details</h2>
+                <p class="section-copy">Add the readable location label, description, and optional evidence.</p>
+              </div>
+              <input id="reportLocation" type="text" placeholder="Location label">
+              <div id="locationLookupStatus" class="field-help">Pick a point on the map and we’ll suggest a nearby place label.</div>
+              <textarea id="reportDescription" rows="5" placeholder="Describe what happened."></textarea>
+              <div class="field-grid two">
+                <input id="reportName" type="text" placeholder="Your name (optional)">
+                <input id="reportPhoto" type="file" accept="image/*">
+              </div>
+              <div id="photoMeta" class="list-card">No photo selected.</div>
+            </div>
+
+            <div id="step4" class="report-form-grid hidden">
+              <div>
+                <h2 class="section-title">Review</h2>
+                <p class="section-copy">Confirm your report details before final submission.</p>
+              </div>
+              <div id="reviewSummary" class="list-stack"></div>
+            </div>
+
+            <div id="confirmationState" class="report-form-grid hidden">
+              <div class="content-card">
+                <h2 class="section-title">Thank you for reporting</h2>
+                <p id="confirmationCopy" class="section-copy"></p>
+                <div class="list-stack confirmation-steps">
+                  <div class="list-card"><strong>1. Moderation review</strong><div class="section-copy">Your report is saved as submitted and reviewed before it becomes public.</div></div>
+                  <div class="list-card"><strong>2. Public map update</strong><div class="section-copy">If approved, the location is generalized where needed and added to the map.</div></div>
+                  <div class="list-card"><strong>3. Local follow-up</strong><div class="section-copy">Patterns of repeated activity can support local alerts and prevention work.</div></div>
+                </div>
+                <div class="action-grid two">
+                  <a class="button button-secondary" href="/bearsmart/map">View Updated Map</a>
+                  <a class="button button-primary" href="/bearsmart/report">Start Another</a>
+                </div>
+              </div>
+            </div>
+
+            <div id="reportNav" class="map-head report-nav">
+              <button id="backStepButton" class="button button-ghost" type="button">Back</button>
+              <button id="nextStepButton" class="button button-primary" type="button">Next Step</button>
+            </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+  <script src="/bearsmart-static/shared.js"></script>
+  <script src="/bearsmart-static/emergency-gate.js"></script>
+  <script src="/bearsmart-static/report.js"></script>
+</body>
+</html>

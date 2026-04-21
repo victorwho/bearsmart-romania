@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>BearSmart Community Feed</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;family=Public+Sans:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary-fixed-variant": "#2f4d34",
+                    "primary-fixed": "#c8ecc9",
+                    "on-tertiary": "#ffffff",
+                    "outline": "#737971",
+                    "on-primary": "#ffffff",
+                    "on-secondary-fixed-variant": "#653d1e",
+                    "surface-container-low": "#f9f3e6",
+                    "secondary-container": "#fdc39a",
+                    "inverse-primary": "#adcfae",
+                    "secondary-fixed-dim": "#f4bb92",
+                    "tertiary": "#4a2400",
+                    "on-surface-variant": "#424842",
+                    "tertiary-fixed": "#ffdcc3",
+                    "surface-variant": "#e8e2d6",
+                    "error-container": "#ffdad6",
+                    "on-secondary": "#ffffff",
+                    "surface": "#fff9ed",
+                    "tertiary-container": "#6a3700",
+                    "tertiary-fixed-dim": "#ffb77d",
+                    "surface-container-highest": "#e8e2d6",
+                    "primary-fixed-dim": "#adcfae",
+                    "on-background": "#1d1c14",
+                    "secondary": "#805533",
+                    "primary": "#17341d",
+                    "surface-dim": "#dfd9cd",
+                    "on-secondary-container": "#794e2e",
+                    "on-tertiary-container": "#ff9939",
+                    "background": "#fff9ed",
+                    "on-error": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "error": "#ba1a1a",
+                    "surface-tint": "#47664b",
+                    "surface-bright": "#fff9ed",
+                    "on-primary-fixed": "#03210c",
+                    "surface-container-lowest": "#ffffff",
+                    "on-surface": "#1d1c14",
+                    "on-secondary-fixed": "#301400",
+                    "on-tertiary-fixed-variant": "#6e3900",
+                    "on-tertiary-fixed": "#2f1500",
+                    "inverse-on-surface": "#f6f0e4",
+                    "surface-container-high": "#eee8db",
+                    "on-primary-container": "#98ba9a",
+                    "surface-container": "#f3ede1",
+                    "secondary-fixed": "#ffdcc5",
+                    "primary-container": "#2d4b32",
+                    "outline-variant": "#c2c8bf",
+                    "inverse-surface": "#333028"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Manrope"],
+                    "body": ["Public Sans"],
+                    "label": ["Public Sans"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Public Sans', sans-serif; }
+        h1, h2, h3, h4 { font-family: 'Manrope', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .topo-texture {
+            background-image: radial-gradient(#2f4d34 0.5px, transparent 0.5px);
+            background-size: 24px 24px;
+            opacity: 0.05;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface min-h-screen">
+<header class="w-full top-0 sticky z-50 bg-[#fff9ed] dark:bg-[#1d1c14]">
+<div class="flex justify-between items-center px-8 py-4 max-w-screen-2xl mx-auto font-['Manrope'] tracking-tight">
+<div class="text-2xl font-bold text-[#17341d] dark:text-[#c8ecc9]">BearSmart</div>
+<nav class="hidden md:flex items-center space-x-8">
+<a class="text-[#17341d] dark:text-[#c8ecc9] border-b-2 border-[#17341d] pb-1 hover:text-[#2d4b32] dark:hover:text-[#47664b] transition-colors" href="#">Feed</a>
+<a class="text-[#424842] dark:text-[#c2c8bf] hover:text-[#2d4b32] dark:hover:text-[#47664b] transition-colors" href="#">Safety</a>
+<a class="text-[#424842] dark:text-[#c2c8bf] hover:text-[#2d4b32] dark:hover:text-[#47664b] transition-colors" href="#">Heroes</a>
+<a class="text-[#424842] dark:text-[#c2c8bf] hover:text-[#2d4b32] dark:hover:text-[#47664b] transition-colors" href="#">Events</a>
+</nav>
+<div class="flex items-center space-x-6">
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="bg-surface-container border-none rounded-lg pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-surface-tint/40 w-64" placeholder="Search sightings..." type="text"/>
+</div>
+<div class="flex items-center space-x-4">
+<span class="material-symbols-outlined text-[#17341d] dark:text-[#c8ecc9] cursor-pointer">notifications</span>
+<span class="material-symbols-outlined text-[#17341d] dark:text-[#c8ecc9] cursor-pointer">account_circle</span>
+</div>
+</div>
+</div>
+</header>
+<div class="flex max-w-screen-2xl mx-auto relative">
+<aside class="h-screen w-64 left-0 sticky hidden lg:flex flex-col p-6 space-y-4 bg-[#f9f3e6] dark:bg-[#25241b]">
+<div class="mb-8">
+<div class="text-lg font-black text-[#17341d] mb-1">BearSmart Community</div>
+<div class="text-xs font-medium text-on-surface-variant uppercase tracking-widest">The Digital Ranger</div>
+</div>
+<nav class="flex-1 space-y-2">
+<a class="flex items-center space-x-3 p-3 text-[#17341d] dark:text-[#c8ecc9] font-bold bg-[#e8e2d6] dark:bg-[#323126] rounded-md transition-transform active:scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="forum">forum</span>
+<span class="font-['Manrope'] text-sm font-medium">Community Feed</span>
+</a>
+<a class="flex items-center space-x-3 p-3 text-[#424842] dark:text-[#c2c8bf] hover:bg-[#e8e2d6] dark:hover:bg-[#323126] rounded-md transition-transform active:scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="warning">warning</span>
+<span class="font-['Manrope'] text-sm font-medium">Safety Alerts</span>
+</a>
+<a class="flex items-center space-x-3 p-3 text-[#424842] dark:text-[#c2c8bf] hover:bg-[#e8e2d6] dark:hover:bg-[#323126] rounded-md transition-transform active:scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="military_tech">military_tech</span>
+<span class="font-['Manrope'] text-sm font-medium">Leaderboard</span>
+</a>
+<a class="flex items-center space-x-3 p-3 text-[#424842] dark:text-[#c2c8bf] hover:bg-[#e8e2d6] dark:hover:bg-[#323126] rounded-md transition-transform active:scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="event">event</span>
+<span class="font-['Manrope'] text-sm font-medium">Workshops</span>
+</a>
+<a class="flex items-center space-x-3 p-3 text-[#424842] dark:text-[#c2c8bf] hover:bg-[#e8e2d6] dark:hover:bg-[#323126] rounded-md transition-transform active:scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
+<span class="font-['Manrope'] text-sm font-medium">Field Guide</span>
+</a>
+</nav>
+<button class="bg-primary text-on-primary py-3 rounded-xl font-bold flex items-center justify-center space-x-2 shadow-sm hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">add_circle</span>
+<span>Report Sighting</span>
+</button>
+<div class="pt-8 space-y-2 border-t border-outline-variant/20">
+<a class="flex items-center space-x-3 p-3 text-[#424842] dark:text-[#c2c8bf] hover:bg-[#e8e2d6] rounded-md" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-['Manrope'] text-sm font-medium">Settings</span>
+</a>
+<a class="flex items-center space-x-3 p-3 text-[#424842] dark:text-[#c2c8bf] hover:bg-[#e8e2d6] rounded-md" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span class="font-['Manrope'] text-sm font-medium">Support</span>
+</a>
+</div>
+</aside>
+<main class="flex-1 min-w-0 p-8 lg:p-12">
+<div class="topo-texture absolute inset-0 pointer-events-none"></div>
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-12 relative z-10">
+<div class="xl:col-span-8 space-y-10">
+<section>
+<div class="flex items-center justify-between mb-6">
+<h1 class="text-4xl font-extrabold text-primary tracking-tight">Community Feed</h1>
+<div class="flex space-x-2">
+<span class="px-4 py-1.5 bg-primary-fixed text-on-primary-fixed rounded-full text-xs font-bold">Trending</span>
+<span class="px-4 py-1.5 bg-surface-container-highest text-on-surface-variant rounded-full text-xs font-bold">Latest</span>
+</div>
+</div>
+<div class="p-6 bg-error-container text-on-error-container rounded-xl flex items-start space-x-4 mb-8">
+<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">error</span>
+<div>
+<h3 class="font-bold text-lg leading-tight">PINNED: Grizzly Sighting in Aspen Creek</h3>
+<p class="text-sm opacity-90 mt-1">Spotted 45 minutes ago near the trailhead. Neighbors are advised to keep pets indoors and use the back entrance of the community center.</p>
+<div class="mt-3 flex space-x-4 text-xs font-bold uppercase tracking-wider">
+<a class="underline decoration-2 underline-offset-4" href="#">View Map Location</a>
+<a class="underline decoration-2 underline-offset-4" href="#">Safety Protocols</a>
+</div>
+</div>
+</div>
+<div class="space-y-10">
+<article class="bg-surface-container-lowest rounded-xl p-8 shadow-sm border-l-4 border-secondary">
+<div class="flex items-center space-x-4 mb-6">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-surface-variant">
+<img alt="User Avatar" data-alt="Portrait of a middle-aged man with a friendly smile wearing a flannel shirt and outdoor gear" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCGnBkwk7vdfszzarMmu5WzRb2tDpx-niwM0uRqXD9ax-jLZ68Mg3-hc-LxkQcIGv8zu2CghG6VwgpISHg4bJApFX917ywMRQbOqAJju2q3d2anIHHIPrSviw9CgonFLe7kgOX5OEVrNNT7A63gz1JVqdzexsrGS36vLOrRFKMG5HpIYQlyBDQHXJ3aBqya51am3u0Vw8gqaXFL-g0702ct8JGb-IkQddYBE5VpywrEzOG6wuryzj5Pi1w6TNl65oWZiQ5dOTAIx5p-"/>
+</div>
+<div>
+<div class="font-bold text-primary">Marcus Thorne</div>
+<div class="text-xs text-secondary font-semibold uppercase tracking-tighter">Certified Ranger • 2h ago</div>
+</div>
+</div>
+<h2 class="text-2xl font-bold mb-3">Effective Electric Fencing for Compost</h2>
+<p class="text-on-surface-variant leading-relaxed mb-6">
+                                    Just finished upgrading my backyard perimeter. Remember, the 'hot' wire needs to be at least 6,000 volts to deter a curious black bear. If you need help testing your fence, I have a voltmeter available for neighbors to borrow this weekend.
+                                </p>
+<div class="aspect-video rounded-xl overflow-hidden mb-6 bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="Close-up of a high-quality electric fence wire running through insulators on a wooden post with a blurred green forest background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJDSlyD1XkYptsYP4TPPSTteoVKT1Gx4dv-KmS6f8CmwzQgOnP0ZbcwMqennSIjO1gRdUU84jIAAuwafSHaueo03i-G9vm-VcSWExO06gdAhnSdz9BYKtqr8C0nlfO3TipxDuAtpsuoM5wUtXMqNLJBMMoaW0aL49888tZc235zBzw6xeXMT-L5QIRmLbA8YGxjFk475Otve53drCYyWCYfnN1VcIKh833DQmQmvaur64FaDmpXaX8cFw3-FpLQrOx1qMzdPqfK2Qx"/>
+</div>
+<div class="flex items-center justify-between pt-6 border-t border-surface-variant">
+<div class="flex space-x-6">
+<button class="flex items-center space-x-2 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">thumb_up</span>
+<span class="text-sm font-bold">24</span>
+</button>
+<button class="flex items-center space-x-2 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">chat_bubble</span>
+<span class="text-sm font-bold">8</span>
+</button>
+</div>
+<button class="text-secondary hover:text-primary transition-colors">
+<span class="material-symbols-outlined">bookmark</span>
+</button>
+</div>
+</article>
+<article class="bg-surface-container-low rounded-xl p-8">
+<div class="flex items-center space-x-4 mb-6">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-surface-variant">
+<img alt="User Avatar" data-alt="Portrait of a young woman with tied back hair wearing a green field jacket" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD8pcKSlpkJRZkaZPJMphSqPEEgqh4_Mv3fhKUJMfPQfJS9JwT3PBWH1TdwRKxUm-uXHbXN1kkbF_vbMEkXZe_E6E6a2RlIcTgfsphkdOScpZHTyI3Y8NV70thwPZBbHEpSgC1xrCvRHOnmMyMbklE0oZDZ35GGg4-oZhU6MKnUlSJrodyEKQ99GLBtIgTB-NqBByAPcF8fGb9W2AJWoQXWt4PTeUHaZifpYJtdNigs3N9nj9OsW6MOCna-mvu-jdy5yP2LtrQraxQc"/>
+</div>
+<div>
+<div class="font-bold text-primary">Sarah Miller</div>
+<div class="text-xs text-secondary font-semibold uppercase tracking-tighter">Resident • 5h ago</div>
+</div>
+</div>
+<p class="text-on-surface-variant leading-relaxed italic text-lg mb-4">
+                                    "Is it just me, or have the berry bushes near Pine Trail been completely stripped early this year? Might mean more bears coming closer to the valley looking for calories."
+                                </p>
+<div class="flex items-center space-x-2 text-sm font-medium text-on-surface-variant">
+<span class="material-symbols-outlined text-tertiary">location_on</span>
+<span>Pine Trail Junction</span>
+</div>
+</article>
+</div>
+</section>
+</div>
+<div class="xl:col-span-4 space-y-10">
+<section class="bg-surface-container p-8 rounded-xl">
+<h2 class="text-xl font-extrabold text-primary mb-6 flex items-center space-x-2">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">military_tech</span>
+<span>Community Heroes</span>
+</h2>
+<div class="space-y-6">
+<div class="flex items-center justify-between group">
+<div class="flex items-center space-x-4">
+<div class="relative">
+<img class="w-10 h-10 rounded-full border-2 border-primary" data-alt="Cartoon avatar of a man with a beard and glasses" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAmDdBBCZwO9G7aYZ-p7cWFEryln5qAVGgDywEHD3ZG9ws91YYAX7tgORHz2nFZRlNDP6yMPCnr2Ki10uSGRE6qow91VyUPvxHa5-YEHvMrkqiesU_hukUzVoTCxcJZcUy3KSY7tKVR_rbhjKO2gP4rn6z0htG78ZAAWO7TXNcTz690icU5TejDlOdkGAmVjn69-v9cc72OKY8_791HSt0H1q9_WFU8vK2_a8cukQO1F0TePZCkPXzXl9B7Ypr6WnUM6cx2xZkOt5Mr"/>
+<span class="absolute -top-1 -right-1 bg-secondary text-on-secondary text-[10px] w-4 h-4 flex items-center justify-center rounded-full font-bold">1</span>
+</div>
+<div>
+<div class="font-bold text-sm text-primary">Erik Chen</div>
+<div class="text-[10px] text-on-surface-variant uppercase font-bold tracking-widest">12 Sightings Verified</div>
+</div>
+</div>
+<span class="text-primary font-bold text-sm">2,450 pts</span>
+</div>
+<div class="flex items-center justify-between group">
+<div class="flex items-center space-x-4">
+<div class="relative">
+<img class="w-10 h-10 rounded-full border-2 border-transparent group-hover:border-outline-variant transition-colors" data-alt="Cartoon avatar of a woman with a colorful headscarf" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZ0EWuf4o1JC6NHG2EjLTQv-8aGP85hbHfaZ_-zoE61itgHpizn1tbcEpDDEFm0XFsrcRYVEGt373BgZlRzjKyP_6Wenshy2GRWOyfpmECBruIf7KJqkNg0hTlce_IgPPK6GoZPOvPAkK5voPD22JbR32HbXM6ugf31M-wyedzOWhzKN_woeRaQz7iZ-ZaL4j4qOB2fHRbibKE-6Feh18FPMVN7CrU8sXhnguDvP6NQFryg16jMoHqe82pBGcWAlViXsN9N07yldpV"/>
+<span class="absolute -top-1 -right-1 bg-outline text-on-secondary text-[10px] w-4 h-4 flex items-center justify-center rounded-full font-bold">2</span>
+</div>
+<div>
+<div class="font-bold text-sm text-primary">Aisha Okafor</div>
+<div class="text-[10px] text-on-surface-variant uppercase font-bold tracking-widest">8 Safety Workshops</div>
+</div>
+</div>
+<span class="text-primary font-bold text-sm">1,920 pts</span>
+</div>
+<div class="flex items-center justify-between group">
+<div class="flex items-center space-x-4">
+<div class="relative">
+<img class="w-10 h-10 rounded-full border-2 border-transparent group-hover:border-outline-variant transition-colors" data-alt="Cartoon avatar of a young man with a beanie" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBfm702O785uA1v3bQO6ordX7d7Q7Z9mubJwdS19BF5sJdUwsCrGfoJzsH5plAnOqWsGxXin7j1xruneV3p7ti2Z5WCPBxIMgLzSadDgWqC31a8dN1YWviiSdvbiIwUgS_4JKWJ7ZCOnJBjsAouQiye1Jfg9XrAFxrmjmyL7CSlkyLsf9OwB2BZwrxsYGPSXf4C6aZf8hn4pZXPOWP33sUvxHvhARDKshDlEdrovW62owbOj8KikgMGQw8-TsWlnZ9isRtYI27BwVvY"/>
+<span class="absolute -top-1 -right-1 bg-outline text-on-secondary text-[10px] w-4 h-4 flex items-center justify-center rounded-full font-bold">3</span>
+</div>
+<div>
+<div class="font-bold text-sm text-primary">Lucas Bennett</div>
+<div class="text-[10px] text-on-surface-variant uppercase font-bold tracking-widest">Trail Cleanup Lead</div>
+</div>
+</div>
+<span class="text-primary font-bold text-sm">1,100 pts</span>
+</div>
+</div>
+<button class="w-full mt-8 py-3 bg-surface-container-highest text-primary font-bold text-xs uppercase tracking-widest rounded-lg hover:bg-surface-variant transition-colors">
+                            View Full Leaderboard
+                        </button>
+</section>
+<section class="space-y-6">
+<h2 class="text-xl font-extrabold text-primary flex items-center space-x-2">
+<span class="material-symbols-outlined text-secondary">calendar_today</span>
+<span>Upcoming Workshops</span>
+</h2>
+<div class="bg-surface-container-lowest p-6 rounded-xl border-l-4 border-primary shadow-sm hover:translate-x-1 transition-transform cursor-pointer">
+<div class="text-[10px] text-secondary font-bold uppercase tracking-widest mb-2">Saturday, Oct 14 • 10:00 AM</div>
+<h3 class="font-bold text-primary mb-2">Bear Spray 101: Inert Practice</h3>
+<p class="text-xs text-on-surface-variant mb-4">Learn the wind-allowance technique and effective range with inert training cans.</p>
+<div class="flex items-center justify-between">
+<span class="text-[10px] font-bold text-on-surface-variant">12 Spots Left</span>
+<span class="text-primary font-bold text-xs underline decoration-2 underline-offset-4">Register</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl border-l-4 border-outline-variant shadow-sm hover:translate-x-1 transition-transform cursor-pointer">
+<div class="text-[10px] text-secondary font-bold uppercase tracking-widest mb-2">Wednesday, Oct 18 • 6:30 PM</div>
+<h3 class="font-bold text-primary mb-2">Electric Fence Maintenance</h3>
+<p class="text-xs text-on-surface-variant mb-4">Winterizing your perimeter and checking grounding rods for frozen soil conditions.</p>
+<div class="flex items-center justify-between">
+<span class="text-[10px] font-bold text-on-surface-variant">Online Session</span>
+<span class="text-primary font-bold text-xs underline decoration-2 underline-offset-4">Register</span>
+</div>
+</div>
+</section>
+<div class="relative overflow-hidden rounded-xl h-48 bg-primary flex items-center p-8">
+<div class="absolute inset-0 opacity-20">
+<img class="w-full h-full object-cover" data-alt="Breathtaking mountain range shrouded in mist at sunrise with deep green valleys" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_26nm0JwWQ0qHR1BEvuop_18qJmWaTUauW7zFUuamtw4hYaQSC7eCD15ovB50pc9fKw-P_g7yZ66b2VXbJ2gj0CLkm2ckSWONElzUXxaDiLydHE6U2hnKByMB7IghXIHU7vKMdk346_wcbr6jqEV_XOX1yoW-EbGPYReGCDaVUA98hASsknzwYHYFeTzZAMCtR67AQhs9aQRt8_nglVJ_koNfe3TvB9WX8PniMigc2qbITmQhlvbval-yrqahb8jAf_Ja59KXTcAj"/>
+</div>
+<div class="relative z-10">
+<h3 class="text-on-primary font-bold text-lg leading-tight mb-2">Be a Wilderness Hero.</h3>
+<p class="text-primary-fixed text-xs mb-4">Join our community patrol and help keep neighbors safe.</p>
+<button class="bg-primary-fixed text-on-primary-fixed px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-widest">Apply Now</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<footer class="md:hidden fixed bottom-0 left-0 right-0 bg-[#fff9ed] py-4 px-8 border-t border-outline-variant/10 z-50">
+<div class="flex justify-around items-center">
+<div class="flex flex-col items-center space-y-1 text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">forum</span>
+<span class="text-[10px] font-bold uppercase">Feed</span>
+</div>
+<div class="flex flex-col items-center space-y-1 text-on-surface-variant">
+<span class="material-symbols-outlined">warning</span>
+<span class="text-[10px] font-bold uppercase">Safety</span>
+</div>
+<div class="flex flex-col items-center space-y-1 text-on-surface-variant">
+<span class="material-symbols-outlined">add_box</span>
+<span class="text-[10px] font-bold uppercase">Report</span>
+</div>
+<div class="flex flex-col items-center space-y-1 text-on-surface-variant">
+<span class="material-symbols-outlined">event</span>
+<span class="text-[10px] font-bold uppercase">Events</span>
+</div>
+<div class="flex flex-col items-center space-y-1 text-on-surface-variant">
+<span class="material-symbols-outlined">person</span>
+<span class="text-[10px] font-bold uppercase">Profile</span>
+</div>
+</div>
+</footer>
+</body></html>

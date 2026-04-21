@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BearSmart Romania | Bear Safety Guides</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1" rel="stylesheet">
+  <link rel="stylesheet" href="/bearsmart-static/styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="app-header">
+      <div class="brand-row">
+        <img class="brand-logo" src="/logo/bearsmart-logo-light.svg" alt="BearSmart logo">
+        <div class="brand-text">
+          <h1 class="brand-title">Bear Safety Guides</h1>
+        </div>
+        <nav class="top-nav">
+          <a class="nav-link" href="/bearsmart/map">Map</a>
+          <a class="nav-link active" href="/bearsmart/dashboard">Bear Safety Guides</a>
+          <a class="nav-link" href="/bearsmart/localities">BearSmart Localities</a>
+        </nav>
+      </div>
+      <div class="header-right">
+        <a class="button button-primary" href="/bearsmart/report">Report Sighting</a>
+        <a class="button button-alert" href="tel:112">Emergency</a>
+      </div>
+    </header>
+
+    <div class="page-layout no-rail">
+      <main class="page-content">
+        <section class="simple-intro">
+          <h2 class="section-title">Choose a profile and get the actions that matter most.</h2>
+          <p id="dashboardIntroCopy" class="section-copy">Select a profile to load a tailored BearSmart checklist with practical prevention steps.</p>
+        </section>
+
+        <section class="guide-main-grid">
+          <div class="content-card">
+            <div class="map-head align-start">
+              <div>
+                <h3 class="section-title">Choose your profile</h3>
+                <p class="section-copy">Select the role that best matches your situation and we’ll tailor the recommendations to your needs.</p>
+              </div>
+            </div>
+            <div id="profileCardGrid" class="profile-card-grid"></div>
+          </div>
+
+          <div class="content-card recommendation-panel">
+            <div class="map-head">
+              <div>
+                <p class="section-kicker">Personalized Recommendations</p>
+                <h3 id="recommendationHeading" class="section-title">Your checklist</h3>
+              </div>
+              <div class="recommendation-toolbar">
+                <div class="status-chip"><span id="completionLabel">0%</span> complete</div>
+                <button id="printGuideButton" class="button button-secondary" type="button">Save / Print</button>
+              </div>
+            </div>
+            <div id="recommendationFocus" class="recommendation-focus-card">
+              <div>
+                <strong id="selectedProfileTitle"></strong>
+                <p id="selectedProfileCopy" class="section-copy"></p>
+              </div>
+              <div class="recommendation-focus-meta">
+                <span class="status-chip"><span id="recommendationCount">0</span> actions</span>
+              </div>
+            </div>
+            <div id="checklistList" class="recommendation-list"></div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+  <script src="/bearsmart-static/shared.js"></script>
+  <script src="/bearsmart-static/emergency-gate.js"></script>
+  <script src="/bearsmart-static/dashboard.js"></script>
+</body>
+</html>

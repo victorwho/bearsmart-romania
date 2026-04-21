@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>BearSmart | Sighting Report Flow</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;400;600;700;800&amp;family=Public+Sans:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-tertiary-fixed": "#2f1500",
+                        "tertiary-container": "#6a3700",
+                        "tertiary-fixed-dim": "#ffb77d",
+                        "background": "#fff9ed",
+                        "on-primary-container": "#98ba9a",
+                        "error": "#ba1a1a",
+                        "outline": "#737971",
+                        "surface-container-low": "#f9f3e6",
+                        "surface-dim": "#dfd9cd",
+                        "on-surface-variant": "#424842",
+                        "inverse-primary": "#adcfae",
+                        "secondary-fixed-dim": "#f4bb92",
+                        "on-background": "#1d1c14",
+                        "primary-fixed-dim": "#adcfae",
+                        "inverse-surface": "#333028",
+                        "surface": "#fff9ed",
+                        "on-tertiary-container": "#ff9939",
+                        "secondary-fixed": "#ffdcc5",
+                        "on-primary-fixed-variant": "#2f4d34",
+                        "on-error": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "surface-container-highest": "#e8e2d6",
+                        "surface-bright": "#fff9ed",
+                        "primary-container": "#2d4b32",
+                        "inverse-on-surface": "#f6f0e4",
+                        "surface-container-high": "#eee8db",
+                        "surface-container": "#f3ede1",
+                        "tertiary-fixed": "#ffdcc3",
+                        "on-tertiary-fixed-variant": "#6e3900",
+                        "on-secondary-container": "#794e2e",
+                        "on-secondary": "#ffffff",
+                        "surface-tint": "#47664b",
+                        "error-container": "#ffdad6",
+                        "primary": "#17341d",
+                        "primary-fixed": "#c8ecc9",
+                        "tertiary": "#4a2400",
+                        "on-primary-fixed": "#03210c",
+                        "secondary-container": "#fdc39a",
+                        "surface-variant": "#e8e2d6",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-fixed": "#301400",
+                        "outline-variant": "#c2c8bf",
+                        "secondary": "#805533",
+                        "on-error-container": "#93000a",
+                        "on-surface": "#1d1c14",
+                        "on-secondary-fixed-variant": "#653d1e"
+                    },
+                    fontFamily: {
+                        "headline": ["Manrope"],
+                        "body": ["Public Sans"],
+                        "label": ["Public Sans"]
+                    },
+                    borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .topo-pattern {
+            background-image: radial-gradient(circle at 2px 2px, #2f4d34 1px, transparent 0);
+            background-size: 40px 40px;
+            opacity: 0.05;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- TopNavBar: Execution of JSON style keys -->
+<nav class="bg-[#fff9ed]/80 dark:bg-[#1d1c14]/80 backdrop-blur-xl docked full-width top-0 z-50 sticky flex justify-between items-center px-8 py-4 w-full shadow-sm dark:shadow-none">
+<div class="flex items-center gap-8">
+<span class="text-2xl font-black text-[#17341d] dark:text-[#c8ecc9] uppercase tracking-tighter font-headline">BearSmart</span>
+<div class="hidden md:flex gap-6">
+<a class="text-[#424842] dark:text-[#c2c8bf] hover:text-[#17341d] dark:hover:text-[#ffffff] transition-colors font-headline tracking-tight font-bold" href="#">Map</a>
+<a class="text-[#424842] dark:text-[#c2c8bf] hover:text-[#17341d] dark:hover:text-[#ffffff] transition-colors font-headline tracking-tight font-bold" href="#">Community</a>
+<a class="text-[#424842] dark:text-[#c2c8bf] hover:text-[#17341d] dark:hover:text-[#ffffff] transition-colors font-headline tracking-tight font-bold" href="#">Safety Guides</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="bg-primary text-on-primary px-5 py-2 rounded-lg font-headline font-bold text-sm hover:opacity-80 transition-opacity">Report Sighting</button>
+<div class="w-10 h-10 rounded-full bg-surface-container-highest overflow-hidden border border-outline-variant/20">
+<img alt="User Safety Profile" data-alt="professional portrait of a park ranger in uniform with a friendly expression and outdoor mountain background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4JoWpBUZy76CTjLRKrZCtnYXYvWmb-BuZDIfSCrjvE4lP8uIFjqQYVIKFISZ2vEMwFcCqfJslMffhA3-Ds9jOsNTx1Sc4mk-HQal1-1aXMuQMuv7qWFm77WJaBF80FNJtqFaJuHZPOTeOSd-gQoFVfhpoaEJVPoJY0SmrH1VVCW7cwVuft9KHUXANLnu6A50WXv2wbLhBJw8L9yyZQnM_lx4Wc9HbBcc_gUYpvkcb6QNSascIbtpdom8PCM_8JIUOteslvJ-ZeSYd"/>
+</div>
+</div>
+</nav>
+<main class="relative min-h-screen pt-4 pb-20 px-4 md:px-8 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Background Texture -->
+<div class="fixed inset-0 topo-pattern pointer-events-none"></div>
+<!-- Left Column: Contextual Field Guide -->
+<div class="hidden lg:block lg:col-span-4 space-y-8 sticky top-24 h-fit">
+<div class="bg-surface-container-low p-8 rounded-xl border-l-4 border-secondary">
+<h2 class="font-headline text-3xl font-black text-primary leading-tight mb-4">Sighting Report</h2>
+<p class="text-on-surface-variant text-lg leading-relaxed mb-6">Your real-time data helps keep both humans and wildlife safe. Follow these steps to log a verified encounter.</p>
+<div class="space-y-4">
+<div class="flex items-center gap-4 p-4 bg-surface-container-lowest rounded-lg">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">location_on</span>
+<div>
+<p class="font-headline font-bold text-sm text-primary">Precision Matters</p>
+<p class="text-xs text-on-surface-variant">Identify the exact trail marker or terrain feature.</p>
+</div>
+</div>
+<div class="flex items-center gap-4 p-4 bg-surface-container-low rounded-lg opacity-60">
+<span class="material-symbols-outlined text-outline">visibility</span>
+<div>
+<p class="font-headline font-bold text-sm text-on-surface">Visual Identification</p>
+<p class="text-xs text-on-surface-variant">Note shoulder humps or ear shapes.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- News Feed / Tips (Asymmetric Placement) -->
+<div class="bg-primary text-on-primary p-6 rounded-xl shadow-xl rotate-1">
+<span class="bg-tertiary px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest text-white mb-4 inline-block">Ranger Tip</span>
+<p class="font-headline font-bold text-lg mb-2">Maintain 100 Yards</p>
+<p class="text-on-primary-container text-sm leading-snug">Even when reporting, never compromise your safety for a better photo. Use digital zoom only.</p>
+</div>
+</div>
+<!-- Right Column: Flow Canvas -->
+<div class="lg:col-span-8">
+<section class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden min-h-[600px] flex flex-col border border-outline-variant/10">
+<!-- Progress Header -->
+<div class="bg-surface-container-high px-8 py-6 flex justify-between items-center">
+<div class="flex gap-2">
+<div class="w-12 h-1.5 rounded-full bg-primary"></div>
+<div class="w-12 h-1.5 rounded-full bg-outline-variant"></div>
+<div class="w-12 h-1.5 rounded-full bg-outline-variant"></div>
+<div class="w-12 h-1.5 rounded-full bg-outline-variant"></div>
+</div>
+<span class="text-label-md font-bold text-secondary font-label uppercase tracking-widest">Step 1 of 4</span>
+</div>
+<!-- Step Content Container -->
+<div class="p-8 md:p-12 flex-grow">
+<!-- STEP 1: WHERE? (Map Interaction) -->
+<div class="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+<div class="space-y-2">
+<h3 class="font-headline text-4xl font-extrabold text-primary tracking-tight">Where?</h3>
+<p class="text-on-surface-variant text-lg">Pin the precise location of the sighting.</p>
+</div>
+<div class="relative h-[400px] rounded-xl overflow-hidden group">
+<img alt="Topographical Map" class="w-full h-full object-cover grayscale-[20%] brightness-90 group-hover:grayscale-0 transition-all duration-700" data-alt="detailed topographical trail map with contour lines, forest markers, and subtle mountain shading in earth tones" data-location="Banff National Park" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAsaZCaJILwjsJEaR5tTZis4UZqs7ZRQJ1O0SKaOkXcivLjmIezUFg0f5Oltc4cli_z2dYaTJhWfjXNKlBjud035ftn8DP9XC1V_i6yBxmlPS4PBrQzJr_WiH9SstSDM81tHLDNywZxZ2OezB7eek_dX6bSrDV7u2Gm83CmbJ8eD7xQmM4kxmzfJC_ovIZU9cK7EKEN04r7CvH6Qg4fjTZOucORk_jwDb2nNvKrgSKUo4pm5htXsJSdrBIdGZuJYFDfTs_jl01qch9t"/>
+<!-- Map UI Overlays -->
+<div class="absolute inset-0 bg-primary/5 pointer-events-none"></div>
+<div class="absolute top-4 left-4 flex flex-col gap-2">
+<button class="bg-surface/90 backdrop-blur-md p-3 rounded-lg shadow-xl text-primary hover:bg-surface transition-colors flex items-center gap-2 font-bold text-sm">
+<span class="material-symbols-outlined">my_location</span>
+                                    Use My Current Location
+                                </button>
+</div>
+<!-- Interactive Pin -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 cursor-grab">
+<div class="relative">
+<span class="material-symbols-outlined text-5xl text-error drop-shadow-lg" style="font-variation-settings: 'FILL' 1;">location_on</span>
+<div class="absolute -bottom-4 left-1/2 -translate-x-1/2 w-8 h-2 bg-black/20 rounded-full blur-md"></div>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-low p-4 rounded-lg flex items-start gap-4">
+<span class="material-symbols-outlined text-outline-variant">info</span>
+<p class="text-sm text-on-surface-variant italic">Coordinates: 51.1784° N, 115.5708° W — Near Sulphur Mountain Trailhead</p>
+</div>
+</div>
+<!-- Layout for Next Steps (Hidden by default in logic, but rendered for structure) -->
+<!-- STEP 2: WHAT? -->
+<div class="hidden mt-12 pt-12 border-t border-outline-variant/10 space-y-8">
+<div class="space-y-2">
+<h3 class="font-headline text-4xl font-extrabold text-primary tracking-tight">What?</h3>
+<p class="text-on-surface-variant text-lg">Describe the bear and its activities.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<label class="relative group cursor-pointer">
+<input class="peer sr-only" name="bear_type" type="radio"/>
+<div class="bg-surface-container p-6 rounded-xl border-2 border-transparent peer-checked:border-primary peer-checked:bg-primary-fixed transition-all group-hover:bg-surface-container-highest">
+<span class="material-symbols-outlined text-4xl mb-4 text-primary">pets</span>
+<p class="font-headline font-bold text-primary">Black Bear</p>
+<p class="text-xs text-on-surface-variant mt-1">Smaller, straight profile, no shoulder hump.</p>
+</div>
+</label>
+<label class="relative group cursor-pointer">
+<input class="peer sr-only" name="bear_type" type="radio"/>
+<div class="bg-surface-container p-6 rounded-xl border-2 border-transparent peer-checked:border-primary peer-checked:bg-primary-fixed transition-all group-hover:bg-surface-container-highest">
+<span class="material-symbols-outlined text-4xl mb-4 text-primary">landscape</span>
+<p class="font-headline font-bold text-primary">Grizzly</p>
+<p class="text-xs text-on-surface-variant mt-1">Large shoulder hump, concave profile.</p>
+</div>
+</label>
+<label class="relative group cursor-pointer">
+<input class="peer sr-only" name="bear_type" type="radio"/>
+<div class="bg-surface-container p-6 rounded-xl border-2 border-transparent peer-checked:border-primary peer-checked:bg-primary-fixed transition-all group-hover:bg-surface-container-highest">
+<span class="material-symbols-outlined text-4xl mb-4 text-primary">help_outline</span>
+<p class="font-headline font-bold text-primary">Unknown</p>
+<p class="text-xs text-on-surface-variant mt-1">Identification was not possible from distance.</p>
+</div>
+</label>
+</div>
+<div class="space-y-4">
+<p class="font-headline font-bold text-primary">Behavior observed:</p>
+<div class="flex flex-wrap gap-2">
+<button class="px-4 py-2 rounded-full bg-surface-container-high border border-outline-variant/30 text-sm font-semibold hover:bg-primary-fixed transition-colors">Passing Through</button>
+<button class="px-4 py-2 rounded-full bg-surface-container-high border border-outline-variant/30 text-sm font-semibold hover:bg-primary-fixed transition-colors">Foraging</button>
+<button class="px-4 py-2 rounded-full bg-tertiary-container text-on-tertiary-container text-sm font-semibold">Aggressive / Bluff Charge</button>
+<button class="px-4 py-2 rounded-full bg-surface-container-high border border-outline-variant/30 text-sm font-semibold hover:bg-primary-fixed transition-colors">Near Trash/Food</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Navigation -->
+<div class="bg-surface-container px-8 py-6 flex justify-between items-center border-t border-outline-variant/20">
+<button class="flex items-center gap-2 text-on-surface-variant font-bold hover:text-primary transition-colors">
+<span class="material-symbols-outlined">arrow_back</span>
+                        Cancel
+                    </button>
+<button class="bg-primary text-on-primary px-10 py-4 rounded-xl font-headline font-black text-lg shadow-lg hover:shadow-xl hover:translate-y-[-2px] transition-all flex items-center gap-3">
+                        Next Step
+                        <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</section>
+<!-- Secondary Info Cards (Asymmetric Bento) -->
+<div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="bg-surface-container-low p-6 rounded-xl flex items-center gap-6">
+<div class="bg-secondary-container p-4 rounded-full">
+<span class="material-symbols-outlined text-on-secondary-container" style="font-variation-settings: 'FILL' 1;">shield</span>
+</div>
+<div>
+<h4 class="font-headline font-bold text-primary">Verified Ranger Review</h4>
+<p class="text-sm text-on-surface-variant">All aggressive behavior reports are routed directly to local wildlife officers.</p>
+</div>
+</div>
+<div class="bg-surface-container-low p-6 rounded-xl flex items-center gap-6">
+<div class="bg-primary-fixed p-4 rounded-full">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">groups</span>
+</div>
+<div>
+<h4 class="font-headline font-bold text-primary">Community Impact</h4>
+<p class="text-sm text-on-surface-variant">Your report will be anonymous but visible on the global community map.</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) Execution -->
+<nav class="md:hidden fixed bottom-0 left-0 right-0 bg-[#fff9ed]/95 backdrop-blur-md z-50 flex justify-around items-center py-3 px-4 border-t border-outline-variant/10">
+<button class="flex flex-col items-center gap-1 text-[#424842]">
+<span class="material-symbols-outlined">map</span>
+<span class="text-[10px] font-bold">Map</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-[#17341d]">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">campaign</span>
+<span class="text-[10px] font-bold">Report</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-[#424842]">
+<span class="material-symbols-outlined">groups</span>
+<span class="text-[10px] font-bold">Social</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-[#424842]">
+<span class="material-symbols-outlined">verified</span>
+<span class="text-[10px] font-bold">Zones</span>
+</button>
+</nav>
+<!-- Confirmation Overlay (Simulated for Layout Visual) -->
+<div class="fixed inset-0 bg-primary/20 backdrop-blur-sm z-[100] flex items-center justify-center p-4 hidden">
+<div class="bg-surface p-12 rounded-2xl max-w-lg w-full text-center shadow-2xl relative overflow-hidden">
+<div class="absolute top-0 left-0 w-full h-2 bg-primary"></div>
+<div class="topo-pattern absolute inset-0"></div>
+<div class="relative z-10 space-y-6">
+<div class="w-20 h-20 bg-primary-fixed rounded-full flex items-center justify-center mx-auto mb-8">
+<span class="material-symbols-outlined text-4xl text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<h2 class="font-headline text-4xl font-black text-primary">Report Submitted</h2>
+<p class="text-on-surface-variant text-lg">Thank you for contributing to community safety. Your sighting has been logged and the local ranger station has been notified.</p>
+<div class="pt-6">
+<button class="w-full bg-primary text-on-primary py-4 rounded-xl font-headline font-bold text-lg">View Updated Map</button>
+</div>
+</div>
+</div>
+</div>
+</body></html>

@@ -1,0 +1,92 @@
+[
+  {
+    "source_label": "DM",
+    "retailer": "DM",
+    "mode": "url",
+    "url": "https://www.dm.ro/search?query=revox&searchProviderType=dm-products",
+    "cta_text": "Pentru a cumpăra rutina Revox recomandată, apasă aici!",
+    "notes": []
+  },
+  {
+    "source_label": "Tei",
+    "retailer": "Farmacia Tei",
+    "mode": "url",
+    "url": "https://comenzi.farmaciatei.ro/brand/revox",
+    "cta_text": "Pentru a cumpăra rutina Revox recomandată, apasă aici!",
+    "notes": []
+  },
+  {
+    "source_label": "Bebe Tei",
+    "retailer": "Bebe Tei",
+    "mode": "url",
+    "url": "https://comenzi.bebetei.ro/brand/revox",
+    "cta_text": "Pentru a cumpăra rutina Revox recomandată, apasă aici!",
+    "notes": []
+  },
+  {
+    "source_label": "eMag",
+    "retailer": "eMag",
+    "mode": "url",
+    "url": "https://www.emag.ro/brands/brand/revox/vendor/emag?ref=lst_leftbar_6427_1",
+    "cta_text": "Pentru a cumpăra rutina Revox recomandată, apasă aici!",
+    "notes": []
+  },
+  {
+    "source_label": "Douglas",
+    "retailer": "Douglas",
+    "mode": "url",
+    "url": "https://www.douglas.ro/b/revox/",
+    "cta_text": "Pentru a cumpăra rutina Revox recomandată, apasă aici!",
+    "notes": []
+  },
+  {
+    "source_label": "Marrionnaud",
+    "retailer": "Marionnaud",
+    "mode": "url",
+    "url": "https://www.marionnaud.ro/revox/b/1985",
+    "cta_text": "Pentru a cumpăra rutina Revox recomandată, apasă aici!",
+    "notes": []
+  },
+  {
+    "source_label": "Dr. Max",
+    "retailer": "Dr. Max",
+    "mode": "url",
+    "url": "https://www.drmax.ro/search?q=revox",
+    "cta_text": "Pentru a cumpăra rutina Revox recomandată, apasă aici!",
+    "notes": []
+  },
+  {
+    "source_label": "Auchan",
+    "retailer": "Auchan",
+    "mode": "url",
+    "url": "https://www.auchan.ro/revox",
+    "cta_text": "Pentru a cumpăra rutina Revox recomandată, apasă aici!",
+    "notes": []
+  },
+  {
+    "source_label": "Kaufland",
+    "retailer": "Kaufland",
+    "mode": "in_store_only",
+    "url": null,
+    "cta_text": "Gaseste produsele in toate magazinele Kaufland.",
+    "notes": [
+      "Recomanda din magazin"
+    ]
+  },
+  {
+    "source_label": "Sephora",
+    "retailer": "Sephora",
+    "mode": "url",
+    "url": "https://www.sephora.ro/branduri/de-la-a-la-z/revox/revox/",
+    "cta_text": "Pentru a cumpăra rutina Revox recomandată, apasă aici!",
+    "notes": []
+  },
+  {
+    "source_label": "Carrefour",
+    "retailer": "Carrefour",
+    "mode": "url",
+    "url": "https://carrefour.ro/catalogsearch/result/?q=revox",
+    "cta_text": "Pentru a cumpăra rutina Revox recomandată, apasă aici!",
+    "notes": []
+  }
+]
